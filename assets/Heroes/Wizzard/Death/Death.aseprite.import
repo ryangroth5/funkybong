@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://x3i0x4npfrbv"
+path="res://.godot/imported/Death.aseprite-8bed663dc93b4decd6d0955b1313d27b.res"
+
+[deps]
+
+source_file="res://assets/Heroes/Wizzard/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-8bed663dc93b4decd6d0955b1313d27b.res"]
+
+[params]
+

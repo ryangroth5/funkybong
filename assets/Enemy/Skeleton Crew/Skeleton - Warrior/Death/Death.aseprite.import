@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dp65xnfoe66hc"
+path="res://.godot/imported/Death.aseprite-c035b6c76622705217cf4fc195882cd6.res"
+
+[deps]
+
+source_file="res://assets/Enemy/Skeleton Crew/Skeleton - Warrior/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-c035b6c76622705217cf4fc195882cd6.res"]
+
+[params]
+

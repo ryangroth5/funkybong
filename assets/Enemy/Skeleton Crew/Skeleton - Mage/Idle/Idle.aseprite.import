@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://nph5aj1c5prq"
+path="res://.godot/imported/Idle.aseprite-123bcd89c6e0c36c9ffd96073b41fb4f.res"
+
+[deps]
+
+source_file="res://assets/Enemy/Skeleton Crew/Skeleton - Mage/Idle/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-123bcd89c6e0c36c9ffd96073b41fb4f.res"]
+
+[params]
+

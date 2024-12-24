@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://2c0samx4es5q"
+path="res://.godot/imported/Door_front_open_right.aseprite-a8c014769cbada73fc31921a9a24aa27.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Doors/Door_1/single_door/Front/Door_front_open_right.aseprite"
+dest_files=["res://.godot/imported/Door_front_open_right.aseprite-a8c014769cbada73fc31921a9a24aa27.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dcuxio6xyqfpf"
+path="res://.godot/imported/Bone.aseprite-4df7ff2cd0e1b2b388aef0724a6da1ab.res"
+
+[deps]
+
+source_file="res://assets/Weapons/Bone/Bone.aseprite"
+dest_files=["res://.godot/imported/Bone.aseprite-4df7ff2cd0e1b2b388aef0724a6da1ab.res"]
+
+[params]
+

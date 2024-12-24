@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b4a03hhqvd40t"
+path="res://.godot/imported/crossbow_down.aseprite-decc5c4992a2b9204de4dbdf5bda9c22.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Crossbow/crossbow_down.aseprite"
+dest_files=["res://.godot/imported/crossbow_down.aseprite-decc5c4992a2b9204de4dbdf5bda9c22.res"]
+
+[params]
+

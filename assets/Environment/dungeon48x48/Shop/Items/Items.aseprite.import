@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d3upuns5b35qq"
+path="res://.godot/imported/Items.aseprite-4ef932df19f054a6bf411b4658e9c703.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Shop/Items/Items.aseprite"
+dest_files=["res://.godot/imported/Items.aseprite-4ef932df19f054a6bf411b4658e9c703.res"]
+
+[params]
+

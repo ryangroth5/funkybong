@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlkvqf5vxryfe"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_rhy3b"]
+[ext_resource type="FontFile" uid="uid://bd7mtvhc6fwc8" path="res://assets/fonts/old-english-five.ttf" id="2_1ctue"]
+[ext_resource type="Script" path="res://message_timer.gd" id="3_jnhrt"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rhy3b")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_1ctue")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -34.5
+offset_right = 240.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_1ctue")
+theme_override_font_sizes/font_size = 40
+text = "Survive"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -68.0
+offset_right = 100.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_1ctue")
+theme_override_font_sizes/font_size = 63
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.138
+one_shot = true
+script = ExtResource("3_jnhrt")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

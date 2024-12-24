@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c3i75qqcx3woq"
+path="res://.godot/imported/lava.aseprite-0fac4de336f18f34bac82f8f8c8068cb.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/lava/lava.aseprite"
+dest_files=["res://.godot/imported/lava.aseprite-0fac4de336f18f34bac82f8f8c8068cb.res"]
+
+[params]
+

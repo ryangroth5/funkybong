@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://6xnihtsgtw0r"
+path="res://.godot/imported/fire.aseprite-7216e5b6e094f5eb37ad8c75951504ae.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Fire/fire.aseprite"
+dest_files=["res://.godot/imported/fire.aseprite-7216e5b6e094f5eb37ad8c75951504ae.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b5m4ipkuotaft"
+path="res://.godot/imported/Run.aseprite-995e96e4254fe70238b9764f2bb25c10.res"
+
+[deps]
+
+source_file="res://assets/Enemy/Skeleton Crew/Skeleton - Base/Run/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-995e96e4254fe70238b9764f2bb25c10.res"]
+
+[params]
+

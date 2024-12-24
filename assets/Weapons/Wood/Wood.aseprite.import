@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://rjq0vqe6awxr"
+path="res://.godot/imported/Wood.aseprite-ff4375e1d266c9ed88d5b1af1ef71809.res"
+
+[deps]
+
+source_file="res://assets/Weapons/Wood/Wood.aseprite"
+dest_files=["res://.godot/imported/Wood.aseprite-ff4375e1d266c9ed88d5b1af1ef71809.res"]
+
+[params]
+

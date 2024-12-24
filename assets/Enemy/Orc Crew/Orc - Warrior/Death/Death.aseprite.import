@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dco4mhtxd67a6"
+path="res://.godot/imported/Death.aseprite-4b9169511de0a1751c43d166aa8a3f69.res"
+
+[deps]
+
+source_file="res://assets/Enemy/Orc Crew/Orc - Warrior/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-4b9169511de0a1751c43d166aa8a3f69.res"]
+
+[params]
+

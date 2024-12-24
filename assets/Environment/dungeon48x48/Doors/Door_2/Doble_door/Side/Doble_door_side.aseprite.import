@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bpbk0vrb3ffua"
+path="res://.godot/imported/Doble_door_side.aseprite-630ce22be4ad2a94ef86735d5860771c.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Doors/Door_2/Doble_door/Side/Doble_door_side.aseprite"
+dest_files=["res://.godot/imported/Doble_door_side.aseprite-630ce22be4ad2a94ef86735d5860771c.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://4x08eju1y44e"
+path="res://.godot/imported/Skull_chest.aseprite-faad730ad7c3cfe6e10a57636e03dc9a.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Chest/Skull_chest.aseprite"
+dest_files=["res://.godot/imported/Skull_chest.aseprite-faad730ad7c3cfe6e10a57636e03dc9a.res"]
+
+[params]
+

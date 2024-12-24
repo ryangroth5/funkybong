@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dh4sxvsfls3cr"
+path="res://.godot/imported/Idle.aseprite-96b2e25fe7c124d99745df8eae96f845.res"
+
+[deps]
+
+source_file="res://assets/Enemy/Skeleton Crew/Skeleton - Warrior/Idle/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-96b2e25fe7c124d99745df8eae96f845.res"]
+
+[params]
+

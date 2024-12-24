@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bwrkya3bwu1lk"
+path="res://.godot/imported/Door_front.aseprite-7afad039a328ed5a41ad90c29940cc2f.res"
+
+[deps]
+
+source_file="res://assets/Environment/dungeon48x48/Doors/Door_2/Single_door/Front/Door_front.aseprite"
+dest_files=["res://.godot/imported/Door_front.aseprite-7afad039a328ed5a41ad90c29940cc2f.res"]
+
+[params]
+

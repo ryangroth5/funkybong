@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dhinpcqg4rlc8"
+path="res://.godot/imported/Run.aseprite-063d9981a0e1941d10abefa9b0e63f91.res"
+
+[deps]
+
+source_file="res://assets/Heroes/Knight/Run/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-063d9981a0e1941d10abefa9b0e63f91.res"]
+
+[params]
+
