@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://byej2iipnhrdd"]
+[gd_scene load_steps=11 format=4 uid="uid://byej2iipnhrdd"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5qixg"]
+[ext_resource type="PackedScene" uid="uid://dff5fvofexd4q" path="res://mob.tscn" id="2_7mtnd"]
 [ext_resource type="PackedScene" uid="uid://lt3pn2l0gbbb" path="res://player.tscn" id="3_kbp8a"]
 [ext_resource type="PackedScene" uid="uid://dlkvqf5vxryfe" path="res://hud.tscn" id="4_kv66y"]
 [ext_resource type="Texture2D" uid="uid://c26sacyn15yrm" path="res://assets/Environment/dungeon48x48/Wall, ground & stairs/Ground.png" id="5_dt4ys"]
@@ -473,6 +474,7 @@ tile_set = SubResource("TileSet_cf3st")
 
 [node name="Spawner" parent="." instance=ExtResource("6_7a1m1")]
 position = Vector2(700, 700)
+mob_scene = ExtResource("2_7mtnd")
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
