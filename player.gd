@@ -25,57 +25,73 @@ func start(pos):
 
 func _ready() -> void:
 	hide();
-	screen_size = get_viewport_rect().size
+	
 
-func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO
+func _physics_process(delta: float) -> void:
+
+	print("Player initialized with states - idle: ", is_idle,
+		", attacking: ", is_attacking,
+		", facing: ", facing,
+		", delta: ", delta,
+		", velocity: ", velocity)
+	# Reset velocity at start of frame
+	velocity = Vector2.ZERO
 
 	# Only process movement if not attacking
 	if !is_attacking:
 		# Input handling
+		var input_vector = Vector2.ZERO
 		if Input.is_action_pressed("right"):
-			velocity.x += 1
+			input_vector.x += 1
 		if Input.is_action_pressed("left"):
-			velocity.x -= 1
+			input_vector.x -= 1
 		if Input.is_action_pressed("down"):
-			velocity.y += 1
+			input_vector.y += 1
 		if Input.is_action_pressed("up"):
-			velocity.y -= 1
+			input_vector.y -= 1
+
+
+			# Debug print for input
+		if input_vector != Vector2.ZERO:
+			print("Input vector: ", input_vector)
 
 		# Update facing only if we're moving
-		if velocity.length() > 0:
-			velocity = velocity.normalized() * speed
+		if input_vector != Vector2.ZERO:
+			velocity = input_vector.normalized() * speed
 			update_facing(velocity)
 			is_idle = false
 			idle_timer = 0.0
 			update_movement_animation()
 		else:
-			idle_timer += delta
-			if idle_timer >= 1.0 and !is_idle:
-				is_idle = true
-				play_idle_animation()
-			elif !is_idle:
-				$AnimatedSprite2D.stop()
+			$AnimatedSprite2D.stop()
 
-		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, screen_size)
-		move_and_slide()
+		var collision = move_and_slide()
+		if collision:
+			for i in get_slide_collision_count():
+				var collisionObj = get_slide_collision(i)
+				print("I collided with ", collisionObj.get_collider().name)
+			# Handle collision if needed
+			pass
+
+	# Update idle timer regardless of movement state
+	if velocity == Vector2.ZERO:
+		idle_timer += delta
+		if idle_timer >= 1.0 and !is_idle:
+			is_idle = true
+			play_idle_animation()
 
 	# Handle attack input regardless of movement state
 	if Input.is_action_just_pressed("attack") and !is_attacking:
-		play_attack_animation(velocity)
+		play_attack_animation()
 		
-	#print("Player initialized with states - idle: ", is_idle,
-	#	", attacking: ", is_attacking,
-	#	", facing: ", facing)
 
 # Update facing based on velocity
-func update_facing(velocity: Vector2) -> void:
+func update_facing(newVelocity: Vector2) -> void:
 	facing = {
-		"east": velocity.x > 0,
-		"west": velocity.x < 0,
-		"north": velocity.y < 0,
-		"south": velocity.y > 0
+		"east": newVelocity.x > 0,
+		"west": newVelocity.x < 0,
+		"north": newVelocity.y < 0,
+		"south": newVelocity.y > 0
 	}
 
 func get_direction_suffix() -> String:
@@ -102,7 +118,7 @@ func update_movement_animation() -> void:
 func play_idle_animation() -> void:
 	play_animation("idle")
 
-func play_attack_animation(velocity) -> void:
+func play_attack_animation() -> void:
 	is_attacking = true
 	play_animation("attack")
 	await $AnimatedSprite2D.animation_finished
