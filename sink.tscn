@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://ci4klu1pcmcu0"]
+
+[ext_resource type="Texture2D" uid="uid://cbgxqu2emjpwn" path="res://assets/Environment/extra_props/sink-placeholder-Sheet.png" id="1_3hkt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flmci"]
+size = Vector2(52, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntk0l"]
+atlas = ExtResource("1_3hkt4")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wkr5"]
+atlas = ExtResource("1_3hkt4")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yk87"]
+atlas = ExtResource("1_3hkt4")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xowat"]
+atlas = ExtResource("1_3hkt4")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb521"]
+atlas = ExtResource("1_3hkt4")
+region = Rect2(192, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tm8ue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntk0l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wkr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yk87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xowat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb521")
+}],
+"loop": true,
+"name": &"door",
+"speed": 5.0
+}]
+
+[node name="MobSink" type="Area2D" groups=["PlayersGroup"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 25.5)
+shape = SubResource("RectangleShape2D_flmci")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tm8ue")
+animation = &"door"

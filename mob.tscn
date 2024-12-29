@@ -229,9 +229,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fu63y"]
 height = 40.0
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="CharacterBody2D" groups=["mobs"]]
+z_index = 1
 collision_mask = 0
-gravity_scale = 0.0
 script = ExtResource("1_s2pto")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

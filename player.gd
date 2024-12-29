@@ -1,6 +1,6 @@
 extends CharacterBody2D
 signal hit
-
+@export var controllerNumber = 0;
 @export var speed = 400
 var screen_size
 
@@ -16,14 +16,21 @@ var is_attacking = false
 var idle_timer = 0.0
 var west_horizontal_flip_modifier = true;
 
+func set_controller(index) -> void:
+	controllerNumber = index;
 
-func start(pos):
+func get_controller_action(action: String) -> String:
+	return "c" + str(controllerNumber) + "_" + action;
+
+
+func start(pos: Vector2):
 	print("Player starting at position: ", pos) # Basic logging
 	position = pos;
 	show();
 	$CollisionShape2D.disabled = false;
 
 func _ready() -> void:
+	add_to_group("PlayersGroup")
 	hide();
 	
 
@@ -41,13 +48,13 @@ func _physics_process(delta: float) -> void:
 	if !is_attacking:
 		# Input handling
 		var input_vector = Vector2.ZERO
-		if Input.is_action_pressed("right"):
+		if Input.is_action_pressed(get_controller_action("right")):
 			input_vector.x += 1
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed(get_controller_action("left")):
 			input_vector.x -= 1
-		if Input.is_action_pressed("down"):
+		if Input.is_action_pressed(get_controller_action("down")):
 			input_vector.y += 1
-		if Input.is_action_pressed("up"):
+		if Input.is_action_pressed(get_controller_action("up")):
 			input_vector.y -= 1
 
 
@@ -81,7 +88,7 @@ func _physics_process(delta: float) -> void:
 			play_idle_animation()
 
 	# Handle attack input regardless of movement state
-	if Input.is_action_just_pressed("attack") and !is_attacking:
+	if Input.is_action_just_pressed(get_controller_action("attack")) and !is_attacking:
 		play_attack_animation()
 		
 
@@ -138,3 +145,8 @@ func _on_body_entered(_body: Node2D) -> void:
 	hide();
 	hit.emit();
 	$CollisionShape2D.set_deferred("disabled", true)
+
+
+# When player needs to be removed
+func _exit_tree() -> void:
+	remove_from_group("PlayersGroup")
