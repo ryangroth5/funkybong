@@ -169,6 +169,18 @@ c3_attack={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="underground"
+2d_render/layer_2="ground"
+2d_render/layer_3="props"
+2d_physics/layer_1="walls"
+2d_navigation/layer_1="walls"
+2d_physics/layer_2="mobs"
+2d_navigation/layer_2="mobs"
+2d_physics/layer_3="players"
+2d_navigation/layer_3="players"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
