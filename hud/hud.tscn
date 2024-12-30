@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlkvqf5vxryfe"]
+
+[ext_resource type="Script" path="res://hud/hud.gd" id="1_rhy3b"]
+[ext_resource type="Script" path="res://hud/message_timer.gd" id="3_jnhrt"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rhy3b")
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.138
+one_shot = true
+script = ExtResource("3_jnhrt")
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 859.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

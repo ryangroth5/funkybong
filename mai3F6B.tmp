@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://byej2iipnhrdd"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5qixg"]
+[ext_resource type="PackedScene" uid="uid://dff5fvofexd4q" path="res://mobs/ghost/ghost.tscn" id="2_7mtnd"]
+[ext_resource type="PackedScene" uid="uid://nga5ardxn5jk" path="res://levels/start/start_level.tscn" id="3_mndbd"]
+[ext_resource type="PackedScene" uid="uid://dlkvqf5vxryfe" path="res://hud/hud.tscn" id="4_kv66y"]
+[ext_resource type="PackedScene" uid="uid://bx3cxvyerh0rg" path="res://objects/spawner/spawner.tscn" id="6_7a1m1"]
+[ext_resource type="PackedScene" uid="uid://md0t1d6brnqh" path="res://camera/zoomy_camera_2d.tscn" id="7_60b8f"]
+[ext_resource type="PackedScene" uid="uid://cgjnbct4ch8yq" path="res://logic/controller_manager/controller_manager.tscn" id="7_n0teo"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_5qixg")
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(500, 500)
+
+[node name="HUD" parent="." instance=ExtResource("4_kv66y")]
+
+[node name="underground" parent="." instance=ExtResource("3_mndbd")]
+
+[node name="MobSpawner" parent="." groups=["MobSpawnersGroup"] instance=ExtResource("6_7a1m1")]
+z_index = 1
+position = Vector2(700, 700)
+mob_scene = ExtResource("2_7mtnd")
+
+[node name="GlobalSpawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="ZoomyCamera2D" parent="." instance=ExtResource("7_60b8f")]
+
+[node name="ControllerManager" parent="." instance=ExtResource("7_n0teo")]
+script = null
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="GlobalSpawnTimer" to="." method="_on_global_spawn_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgjnbct4ch8yq"]
+
+[ext_resource type="Script" path="res://logic/controller_manager/controller_manager.gd" id="1_kcdnd"]
+
+[node name="ControllerManager" type="Node"]
+script = ExtResource("1_kcdnd")

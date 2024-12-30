@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://du6av1i67cudx"]
+
+[node name="StartLevel" type="Node"]
+
+[node name="underground" type="TileMapLayer" parent="."]
+
+[node name="ground" type="TileMapLayer" parent="underground"]

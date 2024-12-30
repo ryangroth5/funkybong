@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://md0t1d6brnqh"]
+
+[ext_resource type="Script" path="res://camera/zoomy_camera_2d.gd" id="1_cpwmg"]
+
+[node name="ZoomyCamera2D" type="Camera2D"]
+script = ExtResource("1_cpwmg")
