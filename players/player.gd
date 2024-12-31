@@ -128,14 +128,7 @@ func play_idle_animation() -> void:
 func play_attack_animation() -> void:
 	is_attacking = true
 	play_animation("attack")
-	var timer = get_tree().create_timer(1.0)
-	# Create a signal group to wait for either condition
-    var signals = []
-    signals.append($AnimatedSprite2D.animation_finished)
-    signals.append(timer.timeout)
-    
-    await Signal.any(signals)
-
+	await $AnimatedSprite2D.animation_finished
 	is_attacking = false
 	
 	# Check current input state
