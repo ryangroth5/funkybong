@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		if input_vector != Vector2.ZERO:
 			velocity = input_vector.normalized() * speed
 			update_facing(velocity)
-			is_idle = false
+			is_idle = !is_attacking
 			idle_timer = 0.0
 			update_movement_animation()
 		else:
