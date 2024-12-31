@@ -24,5 +24,5 @@ func spawn()->void:
 	mob.velocity = velocity;
 
 	# Spawn the mob by adding it to the Main scene.
-	add_child(mob)	
+	get_parent().add_child(mob)	
 	

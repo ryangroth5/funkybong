@@ -8,14 +8,15 @@ func _ready() -> void:
 	controller_manager.controller_connected.connect(_on_controller_connected)
 
 func game_over() -> void:
+	get_tree().call_group("PlayersGroup", "queue_free")
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
 
 func new_game() -> void:
 	score = 0
-	get_tree().call_group("PlayersGroup", "queue_free")
-	controller_manager.reset_controllers()
+	$GlobalSpawnTimer.start();
+	#controller_manager.reset_controllers()
 
 func _on_start_timer_timeout() -> void:
 	$GlobalSpawnTimer.start()
@@ -30,11 +31,14 @@ func _on_hud_start_game() -> void:
 
 func _on_global_spawn_timer_timeout() -> void:
 	var spawners = get_tree().get_nodes_in_group("MobSpawnersGroup")
+	if(spawners.is_empty()):
+		printerr("Expected a spawner somewhere in the mob spawners group")
 	for spawner in spawners:
 		spawner.spawn()
 
 func _on_controller_connected(controller_index: int) -> void:
 	spawn_player(controller_index)
+	new_game();
 
 func spawn_player(controller_index: int) -> void:
 	print("Spawning player for controller %d" % controller_index)
@@ -42,4 +46,5 @@ func spawn_player(controller_index: int) -> void:
 	var player_instance = player_scene.instantiate()
 	add_child(player_instance)
 	player_instance.set_controller(controller_index)
-	player_instance.start($StartPosition.position)
+	player_instance.start(get_node("Level/StartPosition").position)
+	
