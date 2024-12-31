@@ -31,7 +31,7 @@ func _on_hud_start_game() -> void:
 
 func _on_global_spawn_timer_timeout() -> void:
 	var spawners = get_tree().get_nodes_in_group("MobSpawnersGroup")
-	if(spawners.is_empty()):
+	if (spawners.is_empty()):
 		printerr("Expected a spawner somewhere in the mob spawners group. Make sure the map has a spawner and that the spawner is in the MobSpawnersGroup")
 	for spawner in spawners:
 		spawner.spawn()
@@ -47,4 +47,3 @@ func spawn_player(controller_index: int) -> void:
 	add_child(player_instance)
 	player_instance.set_controller(controller_index)
 	player_instance.start(get_node("Level/StartPosition").position)
-	

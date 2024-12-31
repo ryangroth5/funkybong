@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci4klu1pcmcu0"]
+[gd_scene load_steps=10 format=3 uid="uid://ci4klu1pcmcu0"]
 
 [ext_resource type="Texture2D" uid="uid://cbgxqu2emjpwn" path="res://assets/Environment/extra_props/sink-placeholder-Sheet.png" id="1_3hkt4"]
+[ext_resource type="Script" path="res://objects/sink/sink.gd" id="1_iqh1o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flmci"]
 size = Vector2(52, 69)
@@ -53,7 +54,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MobSink" type="Area2D" groups=["MobSkinksGroup"]]
+[node name="MobSink" type="Area2D" groups=["MobSinksGroup"]]
+collision_mask = 2
+script = ExtResource("1_iqh1o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 25.5)
@@ -62,3 +65,5 @@ shape = SubResource("RectangleShape2D_flmci")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tm8ue")
 animation = &"door"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

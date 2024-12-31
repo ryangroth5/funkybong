@@ -1001,6 +1001,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 z_index = 7
 z_as_relative = false
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_k257o")
 metadata/_edit_group_ = true
