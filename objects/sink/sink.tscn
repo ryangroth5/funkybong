@@ -53,7 +53,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MobSink" type="Area2D"]
+[node name="MobSink" type="Area2D" groups=["MobSkinksGroup"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 25.5)

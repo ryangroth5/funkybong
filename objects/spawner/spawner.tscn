@@ -99,7 +99,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dd5y"]
 size = Vector2(50, 34)
 
-[node name="MobSpawner" type="Area2D"]
+[node name="MobSpawner" type="Area2D" groups=["MobSpawnersGroup"]]
 script = ExtResource("1_oc04n")
 mob_scene = ExtResource("2_gsobx")
 

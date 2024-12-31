@@ -32,7 +32,7 @@ func _on_hud_start_game() -> void:
 func _on_global_spawn_timer_timeout() -> void:
 	var spawners = get_tree().get_nodes_in_group("MobSpawnersGroup")
 	if(spawners.is_empty()):
-		printerr("Expected a spawner somewhere in the mob spawners group")
+		printerr("Expected a spawner somewhere in the mob spawners group. Make sure the map has a spawner and that the spawner is in the MobSpawnersGroup")
 	for spawner in spawners:
 		spawner.spawn()
 
