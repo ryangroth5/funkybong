@@ -729,3 +729,12 @@ position = Vector2(1716, 789)
 
 [node name="MobSink" parent="." instance=ExtResource("5_pl6aw")]
 position = Vector2(1727, 2283)
+
+[node name="MobSpawner2" parent="." instance=ExtResource("4_0v40v")]
+position = Vector2(499, 1229)
+
+[node name="MobSpawner3" parent="." instance=ExtResource("4_0v40v")]
+position = Vector2(3546, 1359)
+
+[node name="MobSink2" parent="." instance=ExtResource("5_pl6aw")]
+position = Vector2(3019, 2952)
