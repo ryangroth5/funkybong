@@ -84,7 +84,7 @@ func _physics_process(delta: float) -> void:
 	if velocity == Vector2.ZERO:
 		idle_timer += delta
 		if idle_timer >= 1.0 and !is_idle:
-			is_idle = true
+			is_idle = !is_attacking # these cannot be the same.
 			play_idle_animation()
 
 	# Handle attack input regardless of movement state
@@ -128,17 +128,32 @@ func play_idle_animation() -> void:
 func play_attack_animation() -> void:
 	is_attacking = true
 	play_animation("attack")
-	await $AnimatedSprite2D.animation_finished
+	var timer = get_tree().create_timer(1.0)
+	# Create a signal group to wait for either condition
+    var signals = []
+    signals.append($AnimatedSprite2D.animation_finished)
+    signals.append(timer.timeout)
+    
+    await Signal.any(signals)
+
 	is_attacking = false
 	
-	# Return to appropriate state
-	if velocity.length() == 0:
-		if is_idle:
-			play_idle_animation()
-		else:
-			$AnimatedSprite2D.stop()
-	else:
+	# Check current input state
+	var input_vector = Vector2.ZERO
+	if Input.is_action_pressed(get_controller_action("right")):
+		input_vector.x += 1
+	if Input.is_action_pressed(get_controller_action("left")):
+		input_vector.x -= 1
+	if Input.is_action_pressed(get_controller_action("down")):
+		input_vector.y += 1
+	if Input.is_action_pressed(get_controller_action("up")):
+		input_vector.y -= 1
+	
+	# Transition based on current input
+	if input_vector != Vector2.ZERO:
 		update_movement_animation()
+	else:
+		play_idle_animation()
 
 
 func _on_body_entered(_body: Node2D) -> void:
