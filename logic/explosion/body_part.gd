@@ -21,13 +21,18 @@ func _ready() -> void:
 	# Set the actual scale duration
 	actual_scale_duration = scale_duration if scale_duration > 0 else effect_duration * 0.8
 	
+	# Configure physics for top-down
+	gravity_scale = 0 # Disable gravity
+	linear_damp = 1.0 # Add some drag to slow down over time
+	angular_damp = 1.0 # Add some rotational drag
+	
 	# Set up initial physics
 	if initial_orientation < 0:
 		rotation = randf() * TAU # Random rotation between 0 and 2π
 	else:
 		rotation = initial_orientation
 	
-	# Apply random initial force and torque
+	# Apply random initial force and torque for top-down explosion effect
 	var force_direction = Vector2.RIGHT.rotated(randf() * TAU)
 	apply_central_impulse(force_direction * initial_force)
 	apply_torque_impulse((randf() * 2 - 1) * initial_torque)
@@ -35,12 +40,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	current_time += delta
 	
-	# Calculate scale based on time
+	# Calculate scale based on time (simulates height in top-down view)
 	var scale_factor = 1.0
 	if current_time <= actual_scale_duration:
 		var time_factor = current_time / actual_scale_duration
 		# Smooth parabolic curve that starts and ends at 1.0
-		scale_factor = 1.0 + (sin(time_factor * PI) * 0.25)
+		scale_factor = 1.0 + (sin(time_factor * PI) * 0.25) # Reduced scale variation for top-down
 	
 	scale = Vector2.ONE * scale_factor
 	
