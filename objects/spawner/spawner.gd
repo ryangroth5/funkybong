@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func spawn()->void:
+func spawn() -> void:
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
@@ -21,8 +21,11 @@ func spawn()->void:
 
 	# Choose the velocity for the mob.
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.velocity = velocity;
+	if mob is CharacterBody2D:
+		mob.velocity = velocity;
+	else:
+		mob.linear_velocity = velocity;
+		
 
 	# Spawn the mob by adding it to the Main scene.
-	get_parent().add_child(mob)	
-	
+	get_parent().add_child(mob)

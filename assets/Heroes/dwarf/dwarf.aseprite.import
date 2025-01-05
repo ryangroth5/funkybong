@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://h112ii7myqn4"
+path="res://.godot/imported/dwarf.aseprite-b3a895c8feee6bcbe6340857eaf5db08.res"
+
+[deps]
+
+source_file="res://assets/Heroes/dwarf/dwarf.aseprite"
+dest_files=["res://.godot/imported/dwarf.aseprite-b3a895c8feee6bcbe6340857eaf5db08.res"]
+
+[params]
+
