@@ -23,7 +23,7 @@ func spawn() -> void:
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	if mob is CharacterBody2D:
 		mob.velocity = velocity;
-	else:
+	elif mob is RigidBody2D:
 		mob.linear_velocity = velocity;
 		
 

@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://levels/start/start_level.gd" id="1_wo28i"]
 [ext_resource type="Texture2D" uid="uid://dsxi6v67clgp4" path="res://assets/Environment/dungeon48x48/Wall, ground & stairs/walls.png" id="2_pt7bg"]
 [ext_resource type="PackedScene" uid="uid://bx3cxvyerh0rg" path="res://objects/spawner/spawner.tscn" id="4_0v40v"]
+[ext_resource type="PackedScene" uid="uid://bu614qtre0hpo" path="res://logic/explosion/explosion.tscn" id="5_fj4f5"]
 [ext_resource type="PackedScene" uid="uid://ci4klu1pcmcu0" path="res://objects/sink/sink.tscn" id="5_pl6aw"]
-[ext_resource type="PackedScene" uid="uid://de0cn1j4nyar1" path="res://logic/explosion/body_part.tscn" id="5_vu12a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3g0rw"]
 vertices = PackedVector2Array(16, -0.617188, 16, 16, 0.445313, 16, 0.96875, -1.23438)
@@ -727,7 +727,7 @@ position = Vector2(647, 727)
 
 [node name="MobSpawner" parent="." instance=ExtResource("4_0v40v")]
 position = Vector2(1716, 789)
-mob_scene = ExtResource("5_vu12a")
+mob_scene = ExtResource("5_fj4f5")
 
 [node name="MobSink" parent="." instance=ExtResource("5_pl6aw")]
 position = Vector2(1727, 2283)

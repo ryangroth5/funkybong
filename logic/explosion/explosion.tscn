@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu614qtre0hpo"]
+
+[ext_resource type="Script" path="res://logic/explosion/explosion.gd" id="1_fydql"]
+[ext_resource type="PackedScene" uid="uid://dj4rseujd8ogi" path="res://logic/explosion/blood_particles.tscn" id="2_iuqjb"]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_fydql")
+
+[node name="BloodParticles" parent="." instance=ExtResource("2_iuqjb")]

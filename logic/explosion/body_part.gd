@@ -1,11 +1,11 @@
 extends RigidBody2D
 @export var animation = "skeleton_head"
 @export var initial_orientation: float = -1 # -1 means random
-@export var initial_force: float = 300.0
-@export var initial_torque: float = 5.0
-@export var max_height: float = 100.0
-@export var effect_duration: float = 2.0
-@export var scale_duration: float = -1.0 # -1 means use default (80% of effect_duration)
+@export var initial_force: float = 600.0
+@export var initial_torque: float = 10.0
+@export var max_height: float = 50.0
+@export var effect_duration: float = 5.0
+@export var scale_duration: float = -1.0 # -1 means use default (50% of effect_duration)
 @export var bounce_count: int = 2 # Number of bounces before settling
 @export var bounce_factor: float = 0.6 # How much energy is retained in each bounce
 @export var wall_bounce_factor: float = 0.7 # How much energy is retained in wall bounces
@@ -28,7 +28,7 @@ func _ready() -> void:
 	initial_pos = position
 	
 	# Set the actual scale duration
-	actual_scale_duration = scale_duration if scale_duration > 0 else effect_duration * 0.8
+	actual_scale_duration = scale_duration if scale_duration > 0 else effect_duration * 0.5
 	
 	# Configure physics for top-down
 	gravity_scale = 0 # Disable gravity
@@ -107,12 +107,6 @@ func _physics_process(delta: float) -> void:
 	var velocity_angle = linear_velocity.angle()
 	var blend_factor = clamp(linear_velocity.length() / initial_force, 0, 1)
 	target_rotation = lerp_angle(rotation, velocity_angle, blend_factor)
-	
-	# Update sprite frame based on rotation
-	#var rotation_normalized = fmod(final_rotation, TAU) / TAU
-	#var frame = int(rotation_normalized * 8) % 8
-	#sprite.frame = frame
-	
 	# Optional: fade out near the end of the effect
 	if current_time >= effect_duration:
 		queue_free()
