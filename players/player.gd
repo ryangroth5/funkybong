@@ -1,3 +1,4 @@
+class_name player
 extends CharacterBody2D
 signal hit
 @export var controllerNumber = 0;

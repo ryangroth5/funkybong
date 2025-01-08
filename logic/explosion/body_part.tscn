@@ -263,8 +263,8 @@ script = ExtResource("1_uukq0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fb3gt")
-animation = &"skeleton_leg"
-frame_progress = 0.436466
+animation = &"skeleton_head"
+frame_progress = 0.547719
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
