@@ -1,4 +1,4 @@
-class_name player
+class_name Player
 extends CharacterBody2D
 signal hit
 @export var controllerNumber = 0;
@@ -28,7 +28,7 @@ func _ready() -> void:
 	hide();
 	animation_tree.active = true
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta:float) -> void:
 	# Handle movement physics
 	if !is_attacking:
 		var input_vector = get_input_vector()
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta:float) -> void:
 	# Handle animations and input for actions
 	var input_vector = get_input_vector()
 	if !is_attacking:

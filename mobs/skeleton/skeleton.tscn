@@ -1420,7 +1420,7 @@ script = ExtResource("1_24n6v")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f8jn5")
 animation = &"walk_w"
-frame = 3
+frame = 1
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,

@@ -5,12 +5,6 @@ extends Area2D
 func _ready() -> void:
 	add_to_group("MobSpawnersGroup")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func spawn() -> void:
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()

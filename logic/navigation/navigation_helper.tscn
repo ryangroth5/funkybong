@@ -6,5 +6,12 @@
 script = ExtResource("1_yeoly")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 avoidance_enabled = true
-radius = 29.02
+radius = 43.51
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.616, 0.04, 1)
+debug_path_custom_point_size = 2.53
+debug_path_custom_line_width = 2.32
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

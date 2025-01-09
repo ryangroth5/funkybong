@@ -31,7 +31,7 @@ func handle_start_pressed(controller_index: int) -> void:
 	# Assign controller to a new player if there is room
 	if assigned_controllers.size() < MAX_PLAYERS:
 		assigned_controllers[controller_id] = true
-		emit_signal("controller_connected", controller_index)
+		controller_connected.emit(controller_index)
 	else:
 		print("Max players reached. Cannot assign controller %s." % controller_id)
 
