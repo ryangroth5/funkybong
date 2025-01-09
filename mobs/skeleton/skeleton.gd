@@ -1,3 +1,4 @@
+class_name SkeletonMob
 extends CharacterBody2D
 
 @export var speed: float = 300.0
@@ -5,7 +6,16 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var nav_agent  = $NavigationHelper as NagivationHelper;
+
+
+enum SkeletonState {
+	TO_PLAYER,
+	TO_SINK
+}
+@export var current_state: SkeletonState = SkeletonState.TO_SINK;
+
+
 
 var target_position: Vector2
 var is_attacking: bool = false
@@ -13,7 +23,11 @@ var current_player: Node2D = null
 
 func _ready() -> void:
 	animation_tree.active = true
-	find_and_set_random_sink()
+	add_to_group("DespawnableMobsGroup")
+
+func set_state(new_state:SkeletonState)->void:
+	current_state = new_state;
+
 
 func _physics_process(delta: float) -> void:
 	if is_attacking:
@@ -24,10 +38,11 @@ func _physics_process(delta: float) -> void:
 	current_player = find_closest_player(players)
 	
 	if current_player:
+		set_state(SkeletonState.TO_PLAYER)
 		# Player is within range, chase them
-		nav_agent.target_position = current_player.global_position
+		nav_agent.set_target_position( current_player.global_position );
 	
-	if nav_agent.is_navigation_finished():
+	if !nav_agent.get_is_active():
 		# We've reached our destination
 		state_machine.travel("idle")
 		if !current_player:
@@ -35,16 +50,14 @@ func _physics_process(delta: float) -> void:
 			find_and_set_random_sink()
 		return
 	
-	# Move towards target
-	var next_path_position: Vector2 = nav_agent.get_next_path_position()
-	var direction: Vector2 = global_position.direction_to(next_path_position)
 	
-	velocity = direction * speed
+	
+	velocity = nav_agent.process_navigation(delta,speed,0)
+	update_animations(velocity)
 	move_and_slide()
 	
 	# Update animations
 	if velocity != Vector2.ZERO:
-		animation_tree.set("parameters/walk/blend_position", direction)
 		state_machine.travel("walk")
 	else:
 		state_machine.travel("idle")
@@ -52,6 +65,12 @@ func _physics_process(delta: float) -> void:
 	# Check if close enough to player to attack
 	if current_player and global_position.distance_to(current_player.global_position) < 50:
 		start_attack()
+
+func update_animations(v:Vector2)->void:
+	animation_tree.set("parameters/walk/blend_position", velocity)
+	animation_tree.set("parameters/idle/blend_position", velocity)
+	animation_tree.set("parameters/attack/blend_position", velocity)
+	
 
 func find_closest_player(players: Array) -> Node2D:
 	var closest_player: Node2D = null
@@ -77,7 +96,8 @@ func start_attack() -> void:
 
 # This function should be implemented to find a random sink in your level
 func find_and_set_random_sink() -> void:
-	var sinks = get_tree().get_nodes_in_group("Sinks") # Assuming sinks are in a group
-	if sinks.size() > 0:
-		var random_sink = sinks[randi() % sinks.size()]
-		nav_agent.target_position = random_sink.global_position
+	nav_agent.find_and_set_random_sink()
+
+
+func _on_navigation_helper_navigation_finished() -> void:
+	set_state(SkeletonState.TO_SINK);

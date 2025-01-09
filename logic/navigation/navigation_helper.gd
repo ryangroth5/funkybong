@@ -12,6 +12,8 @@ var is_active: bool = false
 func _ready()->void:
 	parent = get_parent();	
 
+func get_is_active()->bool:
+	return is_active;
 
 func start_navigation_to_position(pos: Vector2) -> void:
 	target_position = pos

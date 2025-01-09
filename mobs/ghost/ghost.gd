@@ -1,3 +1,4 @@
+class_name GhostMob
 extends CharacterBody2D
 
 enum GhostState {
@@ -29,7 +30,6 @@ var target_speed: float
 
 func _ready() -> void:
 	direction = Vector2.RIGHT.rotated(randf() * 2 * PI)
-	nav_agent= get_node("NavigationHelper");
 	target_speed = speed
 	velocity = direction * speed
 	wander_duration_timer = 0;

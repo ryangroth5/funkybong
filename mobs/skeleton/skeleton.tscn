@@ -1,7 +1,8 @@
-[gd_scene load_steps=136 format=3 uid="uid://bm1fsh48foogt"]
+[gd_scene load_steps=137 format=3 uid="uid://bm1fsh48foogt"]
 
 [ext_resource type="Script" path="res://mobs/skeleton/skeleton.gd" id="1_24n6v"]
 [ext_resource type="Texture2D" uid="uid://cmauti50rf727" path="res://assets/Enemy/skeleton/skeleton.png" id="1_ua8cw"]
+[ext_resource type="PackedScene" uid="uid://bv805lsyfadtp" path="res://logic/navigation/navigation_helper.tscn" id="3_ts500"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj4se"]
 atlas = ExtResource("1_ua8cw")
@@ -1419,8 +1420,7 @@ script = ExtResource("1_24n6v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f8jn5")
-animation = &"walk_w"
-frame = 1
+animation = &""
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -1454,3 +1454,7 @@ parameters/walk/blend_position = Vector2(-0.493226, -0.103926)
 libraries = {
 "": SubResource("AnimationLibrary_h4h7x")
 }
+
+[node name="NavigationHelper" parent="." instance=ExtResource("3_ts500")]
+
+[connection signal="navigation_finished" from="NavigationHelper" to="." method="_on_navigation_helper_navigation_finished"]
