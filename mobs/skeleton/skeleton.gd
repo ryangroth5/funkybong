@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var nav_agent  = $NavigationHelper as NagivationHelper;
+@onready var nav_agent = $NavigationHelper as NagivationHelper;
 
 
 enum SkeletonState {
@@ -14,7 +14,6 @@ enum SkeletonState {
 	TO_SINK
 }
 @export var current_state: SkeletonState = SkeletonState.TO_SINK;
-
 
 
 var target_position: Vector2
@@ -25,7 +24,7 @@ func _ready() -> void:
 	animation_tree.active = true
 	add_to_group("DespawnableMobsGroup")
 
-func set_state(new_state:SkeletonState)->void:
+func set_state(new_state: SkeletonState) -> void:
 	current_state = new_state;
 
 
@@ -40,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if current_player:
 		set_state(SkeletonState.TO_PLAYER)
 		# Player is within range, chase them
-		nav_agent.set_target_position( current_player.global_position );
+		nav_agent.set_target_position(current_player.global_position);
 	
 	if !nav_agent.get_is_active():
 		# We've reached our destination
@@ -51,8 +50,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	
-	
-	velocity = nav_agent.process_navigation(delta,speed,0)
+	velocity = nav_agent.process_navigation(delta, speed, 0)
 	update_animations(velocity)
 	move_and_slide()
 	
@@ -66,10 +64,10 @@ func _physics_process(delta: float) -> void:
 	if current_player and global_position.distance_to(current_player.global_position) < 50:
 		start_attack()
 
-func update_animations(v:Vector2)->void:
-	animation_tree.set("parameters/walk/blend_position", velocity)
-	animation_tree.set("parameters/idle/blend_position", velocity)
-	animation_tree.set("parameters/attack/blend_position", velocity)
+func update_animations(v: Vector2) -> void:
+	animation_tree.set("parameters/walk/blend_position", v)
+	animation_tree.set("parameters/idle/blend_position", v)
+	animation_tree.set("parameters/attack/blend_position", v)
 	
 
 func find_closest_player(players: Array) -> Node2D:
