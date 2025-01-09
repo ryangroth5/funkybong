@@ -4,18 +4,12 @@ signal hit
 @export var controllerNumber = 0;
 @export var speed = 400
 var screen_size
-
-# Character state
-var facing = {
-	"east": false,
-	"west": false,
-	"north": false,
-	"south": true # Default facing south
-}
-var is_idle = false
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var state_machine = animation_tree.get("parameters/playback")
+# keep the last direction the controller moved in.
+var last_input_vector = Vector2.ZERO
 var is_attacking = false
-var idle_timer = 0.0
-var west_horizontal_flip_modifier = true;
+
 
 func set_controller(index) -> void:
 	controllerNumber = index;
@@ -25,7 +19,6 @@ func get_controller_action(action: String) -> String:
 
 
 func start(pos: Vector2):
-	print("Player starting at position: ", pos) # Basic logging
 	position = pos;
 	show();
 	$CollisionShape2D.disabled = false;
@@ -33,106 +26,42 @@ func start(pos: Vector2):
 func _ready() -> void:
 	add_to_group("PlayersGroup")
 	hide();
+	animation_tree.active = true
 	
-
 func _physics_process(delta: float) -> void:
-
-	print("Player initialized with states - idle: ", is_idle,
-		", attacking: ", is_attacking,
-		", facing: ", facing,
-		", delta: ", delta,
-		", velocity: ", velocity)
-	# Reset velocity at start of frame
-	velocity = Vector2.ZERO
-
-	# Only process movement if not attacking
+	# Handle movement physics
 	if !is_attacking:
-		# Input handling
-		var input_vector = Vector2.ZERO
-		if Input.is_action_pressed(get_controller_action("right")):
-			input_vector.x += 1
-		if Input.is_action_pressed(get_controller_action("left")):
-			input_vector.x -= 1
-		if Input.is_action_pressed(get_controller_action("down")):
-			input_vector.y += 1
-		if Input.is_action_pressed(get_controller_action("up")):
-			input_vector.y -= 1
-
-
-			# Debug print for input
-		if input_vector != Vector2.ZERO:
-			print("Input vector: ", input_vector)
-
-		# Update facing only if we're moving
+		var input_vector = get_input_vector()
+		
 		if input_vector != Vector2.ZERO:
 			velocity = input_vector.normalized() * speed
-			update_facing(velocity)
-			is_idle = !is_attacking
-			idle_timer = 0.0
-			update_movement_animation()
 		else:
-			$AnimatedSprite2D.stop()
+			velocity = Vector2.ZERO
+			
+	move_and_slide()
 
-		var collision = move_and_slide()
-		if collision:
-			for i in get_slide_collision_count():
-				var collisionObj = get_slide_collision(i)
-				print("I collided with ", collisionObj.get_collider().name)
-			# Handle collision if needed
-			pass
-
-	# Update idle timer regardless of movement state
-	if velocity == Vector2.ZERO:
-		idle_timer += delta
-		if idle_timer >= 1.0 and !is_idle:
-			is_idle = !is_attacking # these cannot be the same.
-			play_idle_animation()
-
-	# Handle attack input regardless of movement state
+func _process(delta: float) -> void:
+	# Handle animations and input for actions
+	var input_vector = get_input_vector()
+	if !is_attacking:
+		if input_vector != Vector2.ZERO:
+			# Update animation tree blend position
+			update_animation_parameters(input_vector);
+			last_input_vector = input_vector;
+			state_machine.travel("walk")
+		else:
+			update_animation_parameters(last_input_vector)
+			state_machine.travel("idle")
+			
+	# Handle attack input
 	if Input.is_action_just_pressed(get_controller_action("attack")) and !is_attacking:
-		play_attack_animation()
-		
-
-# Update facing based on velocity
-func update_facing(newVelocity: Vector2) -> void:
-	facing = {
-		"east": newVelocity.x > 0,
-		"west": newVelocity.x < 0,
-		"north": newVelocity.y < 0,
-		"south": newVelocity.y > 0
-	}
-
-func get_direction_suffix() -> String:
-	for direction in facing.keys():
-		if facing[direction]:
-			return "_" + direction
-	return "_south" # Default fallback
-
-func play_animation(prefix: String) -> void:
-	var anim_name = prefix + get_direction_suffix()
-	$AnimatedSprite2D.animation = anim_name
+		is_attacking = true
+		state_machine.travel("attack")
+		await get_tree().create_timer(0.5).timeout
+		is_attacking = false
 	
-	# Handle horizontal flip only for east/west animations
-	if facing["west"]:
-		$AnimatedSprite2D.flip_h = west_horizontal_flip_modifier
-	else:
-		$AnimatedSprite2D.flip_h = false
-	
-	$AnimatedSprite2D.play()
 
-func update_movement_animation() -> void:
-	play_animation("walk")
-
-func play_idle_animation() -> void:
-	play_animation("idle")
-
-func play_attack_animation() -> void:
-	is_attacking = true
-	play_animation("attack")
-	await $AnimatedSprite2D.animation_finished
-	is_attacking = false
-	
-	# Check current input state
+func get_input_vector() -> Vector2:
 	var input_vector = Vector2.ZERO
 	if Input.is_action_pressed(get_controller_action("right")):
 		input_vector.x += 1
@@ -142,12 +71,7 @@ func play_attack_animation() -> void:
 		input_vector.y += 1
 	if Input.is_action_pressed(get_controller_action("up")):
 		input_vector.y -= 1
-	
-	# Transition based on current input
-	if input_vector != Vector2.ZERO:
-		update_movement_animation()
-	else:
-		play_idle_animation()
+	return input_vector
 
 
 func _on_body_entered(_body: Node2D) -> void:
@@ -159,3 +83,9 @@ func _on_body_entered(_body: Node2D) -> void:
 # When player needs to be removed
 func _exit_tree() -> void:
 	remove_from_group("PlayersGroup")
+
+
+func update_animation_parameters(input: Vector2) -> void:
+	animation_tree["parameters/attack/blend_position"] = input;
+	animation_tree["parameters/idle/blend_position"] = input;
+	animation_tree["parameters/walk/blend_position"] = input;

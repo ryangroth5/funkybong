@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv805lsyfadtp"]
+
+[ext_resource type="Script" path="res://logic/navigation/navigation_helper.gd" id="1_yeoly"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_yeoly")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 29.02

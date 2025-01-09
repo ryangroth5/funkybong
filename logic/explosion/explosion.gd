@@ -1,9 +1,9 @@
 extends Node2D
-@export var animation_root = "skeleton"
+@export var animation_root = "caveman"
 @export var explosion_force: float = 600.0
 @export var explosion_spread: float = 360.0
 @export var blood_particles_duration: float = 0.5
-@export var part_lifetime: float = 5.0
+@export var part_lifetime: float = 60.0
 @export var min_force_variation: float = 0.8
 @export var max_force_variation: float = 1.2
 

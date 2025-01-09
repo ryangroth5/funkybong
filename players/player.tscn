@@ -1,4 +1,4 @@
-[gd_scene load_steps=184 format=3 uid="uid://lt3pn2l0gbbb"]
+[gd_scene load_steps=194 format=3 uid="uid://lt3pn2l0gbbb"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_k257o"]
 [ext_resource type="Texture2D" uid="uid://36e285j42f0y" path="res://assets/Heroes/Starting/caveman-Sheet.png" id="2_32cfk"]
@@ -83,25 +83,25 @@ region = Rect2(192, 512, 64, 64)
 atlas = ExtResource("2_32cfk")
 region = Rect2(256, 512, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4y72b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyssf"]
 atlas = ExtResource("2_32cfk")
-region = Rect2(0, 640, 64, 64)
+region = Rect2(0, 768, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lx8ih"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8inl"]
 atlas = ExtResource("2_32cfk")
-region = Rect2(64, 640, 64, 64)
+region = Rect2(64, 768, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7nnfj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_komle"]
 atlas = ExtResource("2_32cfk")
-region = Rect2(128, 640, 64, 64)
+region = Rect2(128, 768, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v3jwv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb4gd"]
 atlas = ExtResource("2_32cfk")
-region = Rect2(192, 640, 64, 64)
+region = Rect2(192, 768, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_273ub"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_awyws"]
 atlas = ExtResource("2_32cfk")
-region = Rect2(256, 640, 64, 64)
+region = Rect2(256, 768, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a773t"]
 atlas = ExtResource("2_32cfk")
@@ -599,19 +599,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4y72b")
+"texture": SubResource("AtlasTexture_hyssf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lx8ih")
+"texture": SubResource("AtlasTexture_l8inl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7nnfj")
+"texture": SubResource("AtlasTexture_komle")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v3jwv")
+"texture": SubResource("AtlasTexture_xb4gd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_273ub")
+"texture": SubResource("AtlasTexture_awyws")
 }],
 "loop": true,
 "name": &"attack_se",
@@ -1067,6 +1067,7 @@ radius = 12.81
 height = 56.47
 
 [sub_resource type="Animation" id="Animation_fmlsn"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1093,6 +1094,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_n2amn"]
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1120,6 +1122,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_8ashi"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1146,6 +1149,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_hgon2"]
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1173,6 +1177,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_c3v2c"]
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1200,6 +1205,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_du8ta"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1226,6 +1232,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_vg3ss"]
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1253,6 +1260,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_2ibk0"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1986,7 +1994,48 @@ _data = {
 "walk_west": SubResource("Animation_4yeiq")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3exhd"]
+animation = &"attack_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ivnyb"]
+animation = &"attack_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hsytv"]
+animation = &"attack_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ccx6f"]
+animation = &"attack_west"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0quqf"]
+animation = &"attack_ne"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_walup"]
+animation = &"attack_nw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lemj3"]
+animation = &"attack_sw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nbmg1"]
+animation = &"attack_se"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_agujs"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_3exhd")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_ivnyb")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_hsytv")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_ccx6f")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_0quqf")
+blend_point_4/pos = Vector2(0.5, -0.6)
+blend_point_5/node = SubResource("AnimationNodeAnimation_walup")
+blend_point_5/pos = Vector2(-0.8, 0.7)
+blend_point_6/node = SubResource("AnimationNodeAnimation_lemj3")
+blend_point_6/pos = Vector2(-0.8, -0.9)
+blend_point_7/node = SubResource("AnimationNodeAnimation_nbmg1")
+blend_point_7/pos = Vector2(0.5, 0.7)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4f5qa"]
 animation = &"idle_west"
@@ -2018,38 +2067,63 @@ blend_point_0/pos = Vector2(-1, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_kae8c")
 blend_point_1/pos = Vector2(1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_aa11f")
-blend_point_2/pos = Vector2(0, 1)
+blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_3nx1e")
-blend_point_3/pos = Vector2(0, -1)
+blend_point_3/pos = Vector2(0, 1)
 blend_point_4/node = SubResource("AnimationNodeAnimation_wky6s")
-blend_point_4/pos = Vector2(0.6, 0.9)
+blend_point_4/pos = Vector2(0.6, -0.9)
 blend_point_5/node = SubResource("AnimationNodeAnimation_y0dyu")
-blend_point_5/pos = Vector2(-0.7, 0.9)
+blend_point_5/pos = Vector2(-0.7, -1)
 blend_point_6/node = SubResource("AnimationNodeAnimation_616kl")
-blend_point_6/pos = Vector2(-0.7, -1)
+blend_point_6/pos = Vector2(-0.7, 1)
 blend_point_7/node = SubResource("AnimationNodeAnimation_0j134")
-blend_point_7/pos = Vector2(0.6, -1)
-blend_mode = 2
+blend_point_7/pos = Vector2(0.6, 1)
+min_space = Vector2(-1.09, -1.12)
+max_space = Vector2(1.05, 1.07)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qha3d"]
+animation = &"walk_north"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yb80v"]
+animation = &"walk_south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eyucq"]
+animation = &"walk_west"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5p2tb"]
+animation = &"walk_east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pko2t"]
+animation = &"walk_ne"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5gjsi"]
+animation = &"walk_nw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_67jdh"]
+animation = &"walk_sw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_otamv"]
+animation = &"walk_se"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_fej6u"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e1wfx"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc5jb"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcqen"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_im78j"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l0s0n"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o43sa"]
-advance_mode = 2
+blend_point_0/node = SubResource("AnimationNodeAnimation_qha3d")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_yb80v")
+blend_point_1/pos = Vector2(0, 0.9)
+blend_point_2/node = SubResource("AnimationNodeAnimation_eyucq")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_5p2tb")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_pko2t")
+blend_point_4/pos = Vector2(0.6, -0.9)
+blend_point_5/node = SubResource("AnimationNodeAnimation_5gjsi")
+blend_point_5/pos = Vector2(-0.7, -0.9)
+blend_point_6/node = SubResource("AnimationNodeAnimation_67jdh")
+blend_point_6/pos = Vector2(-0.7, 0.8)
+blend_point_7/node = SubResource("AnimationNodeAnimation_otamv")
+blend_point_7/pos = Vector2(0.6, 0.9)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h7bym"]
 states/Start/position = Vector2(219.333, 76.6667)
@@ -2059,7 +2133,6 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_35y8q")
 states/idle/position = Vector2(416.667, 154)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_fej6u")
 states/walk/position = Vector2(545.333, 220)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_e1wfx"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xc5jb"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fcqen"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_im78j"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_l0s0n"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_o43sa")]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 7
@@ -2071,7 +2144,8 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tnwm2")
-animation = &""
+animation = &"walk_ne"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5ftac")
@@ -2084,6 +2158,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_h7bym")
 anim_player = NodePath("../AnimationPlayer")
-parameters/attack/blend_position = Vector2(0, 0)
-parameters/idle/blend_position = Vector2(-0.23131, 0.745958)
-parameters/walk/blend_position = Vector2(0, 0)
+parameters/attack/blend_position = Vector2(-0.255394, 0.224018)
+parameters/idle/blend_position = Vector2(-0.0409384, 0.372032)
+parameters/walk/blend_position = Vector2(0.880582, -0.944573)
