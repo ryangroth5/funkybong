@@ -1,5 +1,6 @@
+class_name GameStateClass
 extends Node
-
+# I'm not using this yet.
 # Example game state variables
 var player_count = 1
 var score = 0

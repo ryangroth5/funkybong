@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx8wvi35ugduw"]
+
+[ext_resource type="Texture2D" uid="uid://y2snopdlq3ny" path="res://assets/Weapons/Wood/Wood.png" id="1_3h57v"]
+[ext_resource type="Script" path="res://logic/weapon/hit_box.gd" id="2_svxsb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bri8n"]
+atlas = ExtResource("1_3h57v")
+region = Rect2(0, 0, 15.3333, 48.9997)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_go066"]
+radius = 8.0
+height = 36.0
+
+[node name="SwordWeapon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+texture = SubResource("AtlasTexture_bri8n")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2_svxsb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -21)
+shape = SubResource("CapsuleShape2D_go066")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=137 format=3 uid="uid://bm1fsh48foogt"]
+[gd_scene load_steps=142 format=3 uid="uid://bm1fsh48foogt"]
 
 [ext_resource type="Script" path="res://mobs/skeleton/skeleton.gd" id="1_24n6v"]
 [ext_resource type="Texture2D" uid="uid://cmauti50rf727" path="res://assets/Enemy/skeleton/skeleton.png" id="1_ua8cw"]
 [ext_resource type="PackedScene" uid="uid://bv805lsyfadtp" path="res://logic/navigation/navigation_helper.tscn" id="3_ts500"]
+[ext_resource type="Script" path="res://logic/weapon/hurt_box.gd" id="4_ey5ok"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj4se"]
 atlas = ExtResource("1_ua8cw")
@@ -710,7 +711,6 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2fky"]
-height = 54.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rgo0l"]
 animation = &"attack_s"
@@ -776,6 +776,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_m7rx1")
 blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_ecasv")
 blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smpg5"]
 animation = &"walk_s"
@@ -820,6 +821,9 @@ blend_point_7/node = SubResource("AnimationNodeAnimation_0xhji")
 blend_point_7/pos = Vector2(0.6, -0.8)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qd1ph"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_na3kc"]
 states/attack/node = SubResource("AnimationNodeBlendSpace2D_3d1oy")
 states/attack/position = Vector2(576.667, 134)
@@ -827,6 +831,46 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_13ms6")
 states/idle/position = Vector2(409.333, 116.667)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_eepgp")
 states/walk/position = Vector2(749.333, 116.667)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qd1ph")]
+
+[sub_resource type="Animation" id="Animation_a36pq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_eqljy"]
 length = 0.5
@@ -1050,6 +1094,46 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["attack_w"]
+}
+
+[sub_resource type="Animation" id="Animation_5inma"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1333, 0.2),
+"transitions": PackedFloat32Array(4.59479, 3.4822, 2.54912, 2),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(4.28709, 2.46229, 11.7127),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 2.46229, 5.85634, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_7whnf"]
@@ -1390,6 +1474,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h4h7x"]
 _data = {
+"RESET": SubResource("Animation_a36pq"),
 "attack_e": SubResource("Animation_eqljy"),
 "attack_n": SubResource("Animation_8cfyu"),
 "attack_ne": SubResource("Animation_rekuh"),
@@ -1398,6 +1483,7 @@ _data = {
 "attack_se": SubResource("Animation_lqggw"),
 "attack_sw": SubResource("Animation_bdghy"),
 "attack_w": SubResource("Animation_u503r"),
+"hit": SubResource("Animation_5inma"),
 "idle_e": SubResource("Animation_7whnf"),
 "idle_n": SubResource("Animation_d1r60"),
 "idle_s": SubResource("Animation_7ae6t"),
@@ -1412,15 +1498,21 @@ _data = {
 "walk_w": SubResource("Animation_odkn4")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sxnkl"]
+height = 58.0
+
 [node name="Skeleton" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_24n6v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f8jn5")
-animation = &""
+animation = &"attack_s"
+frame = 1
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -1441,13 +1533,14 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "032a75735c0ed1ea558329eb9500d706"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 15)
 shape = SubResource("CapsuleShape2D_b2fky")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_na3kc")
 anim_player = NodePath("../AnimationPlayer")
-parameters/attack/blend_position = Vector2(-0.558455, 0.103926)
-parameters/idle/blend_position = Vector2(0, 0)
+parameters/attack/blend_position = Vector2(-0.00451583, 0.989305)
+parameters/idle/blend_position = Vector2(0.786252, -0.700535)
 parameters/walk/blend_position = Vector2(-0.493226, -0.103926)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1456,5 +1549,11 @@ libraries = {
 }
 
 [node name="NavigationHelper" parent="." instance=ExtResource("3_ts500")]
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("4_ey5ok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_sxnkl")
 
 [connection signal="navigation_finished" from="NavigationHelper" to="." method="_on_navigation_helper_navigation_finished"]

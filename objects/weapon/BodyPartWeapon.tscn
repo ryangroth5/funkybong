@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bo0wuad5fbybj"]
+
+[node name="BodyPartWeapon" type="Node2D"]

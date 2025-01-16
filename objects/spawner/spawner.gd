@@ -1,8 +1,10 @@
 extends Area2D
 @export var mob_scene: PackedScene
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set the default state if using a State Machine
 	add_to_group("MobSpawnersGroup")
 
 func spawn() -> void:

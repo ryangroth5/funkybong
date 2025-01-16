@@ -228,7 +228,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fu63y"]
-height = 40.0
+radius = 8.0
+height = 26.0
 
 [node name="Ghost" type="CharacterBody2D" groups=["mobs"]]
 z_index = 1
@@ -254,7 +255,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mobs"]]
-position = Vector2(1, 0)
+position = Vector2(1, 12)
 shape = SubResource("CapsuleShape2D_fu63y")
 
 [node name="NavigationHelper" parent="." instance=ExtResource("3_s5qo3")]

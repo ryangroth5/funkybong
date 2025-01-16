@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cpuobp1717og3" path="res://assets/Environment/dungeon48x48/Chest/Skull_chest_idle.png" id="1_k8as4"]
 [ext_resource type="Script" path="res://objects/spawner/spawner.gd" id="1_oc04n"]
-[ext_resource type="PackedScene" uid="uid://dff5fvofexd4q" path="res://mobs/ghost/ghost.tscn" id="2_gsobx"]
+[ext_resource type="PackedScene" uid="uid://bm1fsh48foogt" path="res://mobs/skeleton/skeleton.tscn" id="2_7swsw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s73wo"]
 atlas = ExtResource("1_k8as4")
@@ -101,7 +101,7 @@ size = Vector2(50, 34)
 
 [node name="MobSpawner" type="Area2D" groups=["MobSpawnersGroup"]]
 script = ExtResource("1_oc04n")
-mob_scene = ExtResource("2_gsobx")
+mob_scene = ExtResource("2_7swsw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p3akl")

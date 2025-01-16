@@ -30,13 +30,13 @@ func _ready() -> void:
 	
 func _physics_process(_delta:float) -> void:
 	# Handle movement physics
-	if !is_attacking:
-		var input_vector = get_input_vector()
-		
-		if input_vector != Vector2.ZERO:
-			velocity = input_vector.normalized() * speed
-		else:
-			velocity = Vector2.ZERO
+
+	var input_vector = get_input_vector()
+	
+	if input_vector != Vector2.ZERO:
+		velocity = input_vector.normalized() * speed
+	else:
+		velocity = Vector2.ZERO
 			
 	move_and_slide()
 
@@ -57,7 +57,7 @@ func _process(_delta:float) -> void:
 	if Input.is_action_just_pressed(get_controller_action("attack")) and !is_attacking:
 		is_attacking = true
 		state_machine.travel("attack")
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(GlobalConstants.ATTACK_SPEED).timeout
 		is_attacking = false
 	
 
