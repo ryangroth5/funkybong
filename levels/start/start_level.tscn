@@ -743,7 +743,8 @@ position = Vector2(3546, 1359)
 [node name="MobSink2" parent="." instance=ExtResource("5_pl6aw")]
 position = Vector2(3019, 2952)
 
-[node name="Skeleton" parent="." instance=ExtResource("7_rxech")]
-
 [node name="Ghost" parent="." instance=ExtResource("8_wbm6b")]
 position = Vector2(530, 443)
+
+[node name="Skeleton" parent="." instance=ExtResource("7_rxech")]
+position = Vector2(248, 409)
