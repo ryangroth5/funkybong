@@ -1,8 +1,11 @@
-[gd_scene load_steps=197 format=3 uid="uid://lt3pn2l0gbbb"]
+[gd_scene load_steps=201 format=3 uid="uid://lt3pn2l0gbbb"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_k257o"]
 [ext_resource type="Texture2D" uid="uid://36e285j42f0y" path="res://assets/Heroes/Starting/caveman-Sheet.png" id="2_32cfk"]
 [ext_resource type="PackedScene" uid="uid://ca0pch4x1lhso" path="res://objects/weapon/MeleeWeapon/MeleeWeapon.tscn" id="3_od8jr"]
+[ext_resource type="Script" path="res://logic/weapon/hurt_box.gd" id="4_xu0s0"]
+[ext_resource type="AudioStream" uid="uid://c01q5kjc6lthb" path="res://assets/sounds/mechanics/coin-up.mp3" id="5_mmas5"]
+[ext_resource type="AudioStream" uid="uid://b2peg8iskobw" path="res://assets/sounds/mechanics/game-start.mp3" id="6_2ylr5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_buyb2"]
 atlas = ExtResource("2_32cfk")
@@ -1066,6 +1069,57 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ftac"]
 radius = 10.01
 height = 28.01
+
+[sub_resource type="Animation" id="Animation_vvceh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeWeapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.715747]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeWeapon:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeWeapon:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_fmlsn"]
 length = 0.15
@@ -2927,57 +2981,6 @@ tracks/4/keys = {
 "values": [-1]
 }
 
-[sub_resource type="Animation" id="Animation_vvceh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeWeapon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 13)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.715747]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeWeapon:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeWeapon:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01ao7"]
 _data = {
 "RESET": SubResource("Animation_vvceh"),
@@ -3159,6 +3162,10 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_fej6u")
 states/walk/position = Vector2(545.333, 220)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_68ntb")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rww1f"]
+radius = 14.0
+height = 56.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 4
@@ -3169,7 +3176,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tnwm2")
 animation = &"idle_south"
-frame = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
@@ -3191,3 +3198,17 @@ parameters/walk/blend_position = Vector2(0.880582, -0.944573)
 z_index = 1
 position = Vector2(0, 13)
 rotation = 0.715747
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource("4_xu0s0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_rww1f")
+
+[node name="CoinUpStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mmas5")
+
+[node name="StartStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2ylr5")

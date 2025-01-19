@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://bm1fsh48foogt"]
+[gd_scene load_steps=145 format=3 uid="uid://bm1fsh48foogt"]
 
 [ext_resource type="Script" path="res://mobs/skeleton/skeleton.gd" id="1_24n6v"]
 [ext_resource type="Texture2D" uid="uid://cmauti50rf727" path="res://assets/Enemy/skeleton/skeleton.png" id="1_ua8cw"]
@@ -838,14 +838,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_eqljy"]
@@ -1078,14 +1078,14 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.133333, 0.3),
-"transitions": PackedFloat32Array(4.28709, 2.46229, 11.7127),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0), Vector2(-5, -5), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_7whnf"]
@@ -1453,6 +1453,92 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sxnkl"]
 height = 58.0
 
+[sub_resource type="Animation" id="Animation_rej6c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rurud"]
+resource_name = "hit"
+length = 0.04
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, -5), Vector2(5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(95.683, 0, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.10821, -0.0925025, 0.0925025]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7faw"]
+_data = {
+"RESET": SubResource("Animation_rej6c"),
+"hit": SubResource("Animation_rurud")
+}
+
 [node name="Skeleton" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 2
@@ -1463,7 +1549,7 @@ script = ExtResource("1_24n6v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f8jn5")
-animation = &"attack_s"
+animation = &"idle_e"
 frame = 1
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
@@ -1507,5 +1593,10 @@ script = ExtResource("4_ey5ok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_sxnkl")
+
+[node name="OverAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l7faw")
+}
 
 [connection signal="navigation_finished" from="NavigationHelper" to="." method="_on_navigation_helper_navigation_finished"]

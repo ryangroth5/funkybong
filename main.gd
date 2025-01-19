@@ -4,6 +4,7 @@ var score: int = 0
 
 @onready var controller_manager: Node = $ControllerManager
 
+
 func _ready() -> void:
 	controller_manager.controller_connected.connect(_on_controller_connected)
 
@@ -38,12 +39,17 @@ func _on_global_spawn_timer_timeout() -> void:
 
 func _on_controller_connected(controller_index: int) -> void:
 	spawn_player(controller_index)
-	new_game();
+
 
 func spawn_player(controller_index: int) -> void:
-	print("Spawning player for controller %d" % controller_index)
-	var player_scene = preload("res://players/player.tscn")
-	var player_instance = player_scene.instantiate()
-	add_child(player_instance)
-	player_instance.set_controller(controller_index)
-	player_instance.start(get_node("Level/StartPosition").position)
+	$PlayerManager.spawn_player(controller_index);
+
+
+func _on_player_manager_start_of_game() -> void:
+	new_game()
+
+
+
+
+func _on_player_manager_end_of_game() -> void:
+	game_over()

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://byej2iipnhrdd"]
+[gd_scene load_steps=8 format=3 uid="uid://byej2iipnhrdd"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5qixg"]
 [ext_resource type="PackedScene" uid="uid://nga5ardxn5jk" path="res://levels/start/start_level.tscn" id="3_mndbd"]
 [ext_resource type="PackedScene" uid="uid://dlkvqf5vxryfe" path="res://hud/hud.tscn" id="4_kv66y"]
+[ext_resource type="Script" path="res://logic/player_hud/player_hud_manager.gd" id="6_hvaxt"]
 [ext_resource type="PackedScene" uid="uid://md0t1d6brnqh" path="res://camera/zoomy_camera_2d.tscn" id="7_60b8f"]
+[ext_resource type="Script" path="res://logic/player_manager/player_manager.gd" id="7_ib2gw"]
 [ext_resource type="PackedScene" uid="uid://cgjnbct4ch8yq" path="res://logic/controller_manager/controller_manager.tscn" id="7_n0teo"]
 
 [node name="Main" type="Node"]
@@ -28,7 +30,15 @@ wait_time = 5.0
 
 [node name="ControllerManager" parent="." instance=ExtResource("7_n0teo")]
 
+[node name="PlayerHudManager" type="Node" parent="."]
+script = ExtResource("6_hvaxt")
+
+[node name="PlayerManager" type="Node" parent="."]
+script = ExtResource("7_ib2gw")
+
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="GlobalSpawnTimer" to="." method="_on_global_spawn_timer_timeout"]
+[connection signal="end_of_game" from="PlayerManager" to="." method="_on_player_manager_end_of_game"]
+[connection signal="start_of_game" from="PlayerManager" to="." method="_on_player_manager_start_of_game"]

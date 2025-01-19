@@ -8,6 +8,9 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var nav_agent = $NavigationHelper as NagivationHelper
+@export var hit_points = 20;
+@onready var over_animation_player = $OverAnimationPlayer;
+
 
 enum SkeletonState {TO_PLAYER, TO_SINK}
 @export var current_state: SkeletonState = SkeletonState.TO_SINK
@@ -16,7 +19,7 @@ var is_attacking: bool = false
 var current_player: Node2D = null
 
 func _ready() -> void:
-	animation_tree.set("parameters/playback", "idle")  # Replace 'idle' with your default state
+	animation_tree.set("parameters/playback", "idle") # Replace 'idle' with your default state
 	animation_tree.active = true
 	add_to_group("DespawnableMobsGroup")
 
@@ -28,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	# Cache players array lookup
-	if current_state == SkeletonState.TO_SINK or current_player == null																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												:
+	if current_state == SkeletonState.TO_SINK or current_player == null:
 		current_player = find_closest_player(get_tree().get_nodes_in_group("PlayersGroup"))
 	
 	if current_player:
@@ -42,7 +45,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	velocity = nav_agent.process_navigation(delta, speed, 0)
-	print("Velocity: ", velocity)
 	# Only update animations if there's actual movement
 	if velocity != Vector2.ZERO:
 		update_animations(velocity)
@@ -90,7 +92,20 @@ func _on_navigation_helper_navigation_finished() -> void:
 	set_state(SkeletonState.TO_SINK)
 
 
-func take_damage(amount: int)->void:
-	state_machine.travel("hit")
-	print("damage", amount)
+func take_damage(amount: int) -> void:
+	if hit_points <= 0: # Early return if already defeated
+		return
+		
+	over_animation_player.play("hit")
+	hit_points -= amount
 	
+	if hit_points <= 0:
+		_spawn_explosion()
+		queue_free();
+
+func _spawn_explosion() -> void:
+	var mob_scene := preload("res://logic/explosion/explosion.tscn") # Use preload instead of load
+	var mob := mob_scene.instantiate()
+	mob.animation_root = "skeleton"
+	mob.position = position
+	get_parent().call_deferred("add_child", mob) # Use call_deferred for safer node addition

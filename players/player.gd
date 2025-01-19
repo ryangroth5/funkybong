@@ -1,38 +1,52 @@
 class_name Player
 extends CharacterBody2D
 signal hit
-@export var controllerNumber = 0;
+@export var controller_number = 0;
 @export var speed = 400
+#** keeps track of if the player is allowed to enter the game, PlayerHud manages this.
+@export var can_enter = false;
 var screen_size
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 # keep the last direction the controller moved in.
-var last_input_vector = Vector2.ZERO
+var last_input_vector: Vector2 = Vector2.ZERO
+var input_vector: Vector2 = Vector2.ZERO
 var is_attacking = false
 
+signal health_changed(new_health: int)
+signal player_died()
+signal player_wants_to_enter(player: Player)
+
+@export var health = 100
 
 func set_controller(index) -> void:
-	controllerNumber = index;
+	controller_number = index;
 
 func get_controller_action(action: String) -> String:
-	return "c" + str(controllerNumber) + "_" + action;
+	return "c" + str(controller_number) + "_" + action;
 
+
+func end():
+	can_enter = false;
+	hide();
+	$CollisionShape2D.disabled = true;
+	position = Vector2.INF
 
 func start(pos: Vector2):
-	position = pos;
-	show();
-	$CollisionShape2D.disabled = false;
+	if (can_enter):
+		can_enter = false;
+		position = pos;
+		show();
+		$CollisionShape2D.disabled = false;
+		$StartStream.playing = true;
 
 func _ready() -> void:
 	add_to_group("PlayersGroup")
 	hide();
 	animation_tree.active = true
 	
-func _physics_process(_delta:float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Handle movement physics
-
-	var input_vector = get_input_vector()
-	
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector.normalized() * speed
 	else:
@@ -40,9 +54,19 @@ func _physics_process(_delta:float) -> void:
 			
 	move_and_slide()
 
-func _process(_delta:float) -> void:
+func wants_to_enter() -> void:
+	if (can_enter):
+		player_wants_to_enter.emit(self)
+	
+
+func coin_up() -> void:
+	health += GlobalConstants.COIN_UP_HEALTH;
+	health_changed.emit(health)
+	$CoinUpStream.playing = true;
+
+func _process(_delta: float) -> void:
 	# Handle animations and input for actions
-	var input_vector = get_input_vector()
+	input_vector = get_input_vector()
 	if !is_attacking:
 		if input_vector != Vector2.ZERO:
 			# Update animation tree blend position
@@ -59,19 +83,26 @@ func _process(_delta:float) -> void:
 		state_machine.travel("attack")
 		await get_tree().create_timer(GlobalConstants.ATTACK_SPEED).timeout
 		is_attacking = false
+
+
+	if Input.is_action_just_pressed(get_controller_action("coin")):
+		coin_up()
+	
+	if Input.is_action_just_pressed(get_controller_action("start")):
+		wants_to_enter()
 	
 
 func get_input_vector() -> Vector2:
-	var input_vector = Vector2.ZERO
+	var measured_input_vector = Vector2.ZERO
 	if Input.is_action_pressed(get_controller_action("right")):
-		input_vector.x += 1
+		measured_input_vector.x += 1
 	if Input.is_action_pressed(get_controller_action("left")):
-		input_vector.x -= 1
+		measured_input_vector.x -= 1
 	if Input.is_action_pressed(get_controller_action("down")):
-		input_vector.y += 1
+		measured_input_vector.y += 1
 	if Input.is_action_pressed(get_controller_action("up")):
-		input_vector.y -= 1
-	return input_vector
+		measured_input_vector.y -= 1
+	return measured_input_vector
 
 
 func _on_body_entered(_body: Node2D) -> void:
@@ -89,3 +120,10 @@ func update_animation_parameters(input: Vector2) -> void:
 	animation_tree["parameters/attack/blend_position"] = input;
 	animation_tree["parameters/idle/blend_position"] = input;
 	animation_tree["parameters/walk/blend_position"] = input;
+
+func take_damage(amount: int) -> void:
+	health -= amount;
+	if (health < 0):
+		player_died.emit()
+	else:
+		health_changed.emit(health)

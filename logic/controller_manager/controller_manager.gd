@@ -15,17 +15,16 @@ func _input(event: InputEvent) -> void:
 			get_tree().quit()
 
 	for i in range(MAX_PLAYERS):
-		var action_name = "c%d_start" % i
-		if Input.is_action_just_pressed(action_name):
-			handle_start_pressed(i)
+		var coin_action = "c%d_coin" % i
+		if Input.is_action_just_pressed(coin_action):
+			handle_controller_assignment(i)
 
 
-func handle_start_pressed(controller_index: int) -> void:
+func handle_controller_assignment(controller_index: int) -> void:
 	var controller_id = "c%d" % controller_index
 
 	# Check if the controller is already assigned to a player
 	if controller_id in assigned_controllers:
-		print("Controller %s already assigned to a player." % controller_id)
 		return
 
 	# Assign controller to a new player if there is room

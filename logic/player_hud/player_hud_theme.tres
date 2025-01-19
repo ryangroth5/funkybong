@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ce5u76q6yy1sg"]
+
+[ext_resource type="FontFile" uid="uid://bd7mtvhc6fwc8" path="res://assets/fonts/old-english-five.ttf" id="1_1spk4"]
+
+[resource]
+resource_name = "PlayerHudTheme"
+default_font = ExtResource("1_1spk4")
+default_font_size = 35
