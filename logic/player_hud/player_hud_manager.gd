@@ -2,15 +2,19 @@ class_name PlayerHudManager
 extends Node
 
 var player_huds: Array = []
+@onready var hud_parent = owner;
 
+#this class attaches to the Main, so that it can get "owner" which is the 
 
+# main entry is here.
 func spawn_player_hud(player: Player):
 	var player_hud: PlayerHud = preload("./PlayerHud.tscn").instantiate()
-	player_hud.initialize(player, owner.get_node("PlayerManager"));
+	player_hud.initialize(player);
 	player_hud.player_hud_removed.connect(_on_player_hud_removed)
 	add_child(player_hud)
 	player_huds.append(player_hud)
 	update_hud_positions()
+	
 
 func _on_player_hud_removed(player_id: int) -> void:
 	# Remove the HUD for the given player_id

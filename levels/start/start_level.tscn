@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://nga5ardxn5jk"]
+[gd_scene load_steps=40 format=4 uid="uid://nga5ardxn5jk"]
 
 [ext_resource type="Texture2D" uid="uid://c26sacyn15yrm" path="res://assets/Environment/dungeon48x48/Wall, ground & stairs/Ground.png" id="1_j85pl"]
 [ext_resource type="Script" path="res://levels/start/start_level.gd" id="1_wo28i"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ci4klu1pcmcu0" path="res://objects/sink/sink.tscn" id="5_pl6aw"]
 [ext_resource type="PackedScene" uid="uid://bm1fsh48foogt" path="res://mobs/skeleton/skeleton.tscn" id="7_rxech"]
 [ext_resource type="PackedScene" uid="uid://dff5fvofexd4q" path="res://mobs/ghost/ghost.tscn" id="8_wbm6b"]
+[ext_resource type="PackedScene" uid="uid://cx8wvi35ugduw" path="res://objects/weapon/SwordWeapon.tscn" id="9_mkuql"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3g0rw"]
 vertices = PackedVector2Array(16, -0.617188, 16, 16, 0.445313, 16, 0.96875, -1.23438)
@@ -748,3 +749,6 @@ position = Vector2(530, 443)
 
 [node name="Skeleton" parent="." instance=ExtResource("7_rxech")]
 position = Vector2(248, 409)
+
+[node name="SwordWeapon" parent="." instance=ExtResource("9_mkuql")]
+position = Vector2(575, 737)

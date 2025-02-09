@@ -1,3 +1,4 @@
+class_name ControllerManager;
 extends Node
 
 signal controller_connected(controller_index: int)

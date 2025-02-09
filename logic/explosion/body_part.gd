@@ -1,3 +1,4 @@
+class_name BodyPart
 extends RigidBody2D
 @export var animation = "skeleton_head"
 @export var initial_orientation: float = -1 # -1 means random
@@ -21,6 +22,20 @@ var bounce_time: float = 0.0
 var last_bounce_height: float = 0.0
 var bounce_duration: float = 0.5 # Duration of each bounce
 var target_rotation: float = 0.0
+
+
+func dropped():
+	freeze = false;
+
+	
+func picked_up():
+	freeze = true;
+	# turn off physics
+	
+
+func can_pickup(_holder: Node2D) -> bool:
+	return true;
+
 
 func _ready() -> void:
 	sprite = $AnimatedSprite2D

@@ -16,34 +16,44 @@ enum HudStates {
 
 
 signal player_hud_removed(player_number: int);
+signal player_hud_state_change(hs: HudStates);
 
 var health: int = 100
 var player: Player = null;
 var player_number: int = 0;
 var hud_state: HudStates = HudStates.HASNT_ENTERED;
-var player_manager: PlayerManager = null;
 
-func initialize(new_player: Player, new_player_manager: PlayerManager) -> void:
+func initialize(new_player: Player) -> void:
 	player = new_player;
 	player_number = player.controller_number;
 	player.player_died.connect(on_player_died)
 	player.health_changed.connect(on_health_changed)
 	player.player_wants_to_enter.connect(on_player_enter)
-	player_manager = new_player_manager;
+	player.current_prop_changed.connect(on_prop_picked_up)
+	
+
+func on_prop_picked_up(prop: PackedScene) -> void:
+	if (prop == null):
+		current_item_sprite.texture = null
+		return
+	if (prop.has_method("get_texture")):
+		current_item_sprite.texture = prop.get_texture()
 
 func transition_state(new_state: HudStates) -> void:
+	# gaurds against possible illegal change of state. 
 	match new_state:
 		HudStates.PLAYING:
 			if (health > 0):
-				player.can_enter = true;
-				player_manager.start(player)
+				hud_state = new_state;
 		HudStates.CONTINUING:
-			pass ;
+			hud_state = new_state;
 		HudStates.HASNT_ENTERED:
-			pass ;
+			hud_state = new_state;
 		_: # Default case
 			push_error("Invalid HUD state: " + str(hud_state))
-	hud_state = new_state;
+
+	if (hud_state == new_state):
+		player_hud_state_change.emit(new_state)
 	
 		
 func ready() -> void:
@@ -59,8 +69,11 @@ func update_position():
 
 func on_health_changed(new_health: int):
 	health = new_health
-	if(health>0):
-		player.can_enter = true;
+	if (health > 0):
+		transition_state(HudStates.PLAYING);
+
+	if (health < 0):
+		transition_state(HudStates.CONTINUING);
 	update_player_health();
 
 func update_player_health() -> void:
@@ -75,5 +88,5 @@ func on_player_died():
 	player_hud_removed.emit(player_number)
 
 
-func on_player_enter():
+func on_player_enter(_player: Player):
 	transition_state(HudStates.PLAYING)

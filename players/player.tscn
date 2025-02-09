@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=3 uid="uid://lt3pn2l0gbbb"]
+[gd_scene load_steps=202 format=3 uid="uid://lt3pn2l0gbbb"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_k257o"]
 [ext_resource type="Texture2D" uid="uid://36e285j42f0y" path="res://assets/Heroes/Starting/caveman-Sheet.png" id="2_32cfk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://logic/weapon/hurt_box.gd" id="4_xu0s0"]
 [ext_resource type="AudioStream" uid="uid://c01q5kjc6lthb" path="res://assets/sounds/mechanics/coin-up.mp3" id="5_mmas5"]
 [ext_resource type="AudioStream" uid="uid://b2peg8iskobw" path="res://assets/sounds/mechanics/game-start.mp3" id="6_2ylr5"]
+[ext_resource type="PackedScene" uid="uid://d3j5hk6akatdl" path="res://logic/prop_holder/PropHolder.tscn" id="7_fr6dq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_buyb2"]
 atlas = ExtResource("2_32cfk")
@@ -1349,10 +1350,10 @@ tracks/3/path = NodePath("MeleeWeapon:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(17, -1), Vector2(7, -4), Vector2(-14, -18)]
+"values": [Vector2(17, -1), Vector2(7, -4), Vector2(-14, -18), Vector2(-13, -17)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1361,10 +1362,10 @@ tracks/4/path = NodePath("MeleeWeapon:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.523598, -0.785397]
+"values": [0.0, -0.523598, -0.785397, -0.785397]
 }
 
 [sub_resource type="Animation" id="Animation_c3v2c"]
@@ -1402,10 +1403,10 @@ tracks/2/path = NodePath("MeleeWeapon:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-6, 8), Vector2(-3, 2), Vector2(10, 4), Vector2(18, 2)]
+"values": [Vector2(-6, 8), Vector2(-3, 2), Vector2(10, 4), Vector2(18, 2), Vector2(19, 4.76837e-07)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1414,10 +1415,10 @@ tracks/3/path = NodePath("MeleeWeapon:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.523598, 0.785397, 1.0472, 1.0472]
+"values": [0.523598, 0.785397, 1.0472, 1.0472, 0.698132]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1466,10 +1467,10 @@ tracks/2/path = NodePath("MeleeWeapon:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-12, 7), Vector2(-15, 8), Vector2(-14, 10), Vector2(-13, 3)]
+"values": [Vector2(-12, 7), Vector2(-15, 8), Vector2(-14, 10), Vector2(-13, 3), Vector2(-10, 3)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1478,10 +1479,10 @@ tracks/3/path = NodePath("MeleeWeapon:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.785397, -2.35619, -2.61799]
+"values": [0.0, -0.785397, -2.35619, -2.61799, -3.14159]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1531,10 +1532,10 @@ tracks/2/path = NodePath("MeleeWeapon:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-9, 1), Vector2(-9, 3), Vector2(-6, 5), Vector2(-23, -1)]
+"values": [Vector2(-9, 1), Vector2(-9, 3), Vector2(-6, 5), Vector2(-23, -1), Vector2(-21, 2)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1543,10 +1544,10 @@ tracks/3/path = NodePath("MeleeWeapon:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.523598, -1.0472, -1.309, -1.309]
+"values": [-0.523598, -1.0472, -1.309, -1.309, -2.09439]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -3176,7 +3177,6 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tnwm2")
 animation = &"idle_south"
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
@@ -3212,3 +3212,6 @@ stream = ExtResource("5_mmas5")
 
 [node name="StartStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_2ylr5")
+
+[node name="PropHolder" parent="." instance=ExtResource("7_fr6dq")]
+pickup_radius = 28.0

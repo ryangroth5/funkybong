@@ -1,9 +1,10 @@
-[gd_scene load_steps=145 format=3 uid="uid://bm1fsh48foogt"]
+[gd_scene load_steps=146 format=3 uid="uid://bm1fsh48foogt"]
 
 [ext_resource type="Script" path="res://mobs/skeleton/skeleton.gd" id="1_24n6v"]
 [ext_resource type="Texture2D" uid="uid://cmauti50rf727" path="res://assets/Enemy/skeleton/skeleton.png" id="1_ua8cw"]
 [ext_resource type="PackedScene" uid="uid://bv805lsyfadtp" path="res://logic/navigation/navigation_helper.tscn" id="3_ts500"]
 [ext_resource type="Script" path="res://logic/weapon/hurt_box.gd" id="4_ey5ok"]
+[ext_resource type="PackedScene" uid="uid://d3j5hk6akatdl" path="res://logic/prop_holder/PropHolder.tscn" id="5_t3o3f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj4se"]
 atlas = ExtResource("1_ua8cw")
@@ -1550,7 +1551,6 @@ script = ExtResource("1_24n6v")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f8jn5")
 animation = &"idle_e"
-frame = 1
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -1598,5 +1598,7 @@ shape = SubResource("CapsuleShape2D_sxnkl")
 libraries = {
 "": SubResource("AnimationLibrary_l7faw")
 }
+
+[node name="PropHolder" parent="." instance=ExtResource("5_t3o3f")]
 
 [connection signal="navigation_finished" from="NavigationHelper" to="." method="_on_navigation_helper_navigation_finished"]

@@ -15,7 +15,7 @@ func update_camera(delta: float) -> void:
 	# Get all player positions
 	var player_positions: Array[Vector2] = []
 	for player in get_tree().get_nodes_in_group(player_group):
-		if player.is_inside_tree():
+		if player.is_inside_tree() and player.visible:
 			player_positions.append(player.global_position)
 
 	if player_positions.is_empty():

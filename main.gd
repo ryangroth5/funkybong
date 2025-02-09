@@ -6,7 +6,16 @@ var score: int = 0
 
 
 func _ready() -> void:
-	controller_manager.controller_connected.connect(_on_controller_connected)
+	GlobalGameState.initialize($PlayerManager, $ControllerManager, $PlayerHudManager);
+	GlobalGameState.game_state_change.connect(game_state_change)
+
+
+func game_state_change(gs: GameStateManager.GameStateEnum):
+	if(gs == GameStateManager.GameStateEnum.GAME_READY):
+		new_game()
+	
+	if(gs==GameStateManager.GameStateEnum.GAME_OVER):
+		game_over()
 
 func game_over() -> void:
 	get_tree().call_group("PlayersGroup", "queue_free")
@@ -37,19 +46,8 @@ func _on_global_spawn_timer_timeout() -> void:
 	for spawner in spawners:
 		spawner.spawn()
 
-func _on_controller_connected(controller_index: int) -> void:
-	spawn_player(controller_index)
-
-
-func spawn_player(controller_index: int) -> void:
-	$PlayerManager.spawn_player(controller_index);
-
-
 func _on_player_manager_start_of_game() -> void:
 	new_game()
-
-
-
 
 func _on_player_manager_end_of_game() -> void:
 	game_over()

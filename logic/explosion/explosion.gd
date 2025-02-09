@@ -32,6 +32,7 @@ func create_explosion() -> void:
 	
 	# Create a timer to spawn body parts after the blood effect
 	var timer = get_tree().create_timer(0.1) # Small delay before parts appear
+	$ExplosionStream.playing = true;
 	timer.timeout.connect(spawn_body_parts)
 	
 	# Clean up particles after they're done

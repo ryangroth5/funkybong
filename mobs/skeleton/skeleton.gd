@@ -10,13 +10,12 @@ extends CharacterBody2D
 @onready var nav_agent = $NavigationHelper as NagivationHelper
 @export var hit_points = 20;
 @onready var over_animation_player = $OverAnimationPlayer;
-
-
 enum SkeletonState {TO_PLAYER, TO_SINK}
 @export var current_state: SkeletonState = SkeletonState.TO_SINK
 
 var is_attacking: bool = false
 var current_player: Node2D = null
+
 
 func _ready() -> void:
 	animation_tree.set("parameters/playback", "idle") # Replace 'idle' with your default state
@@ -79,7 +78,7 @@ func find_closest_player(players: Array) -> Node2D:
 func start_attack() -> void:
 	if is_attacking:
 		return
-	
+
 	is_attacking = true
 	state_machine.travel("attack")
 	await get_tree().create_timer(1.0).timeout

@@ -38,7 +38,4 @@ script = ExtResource("7_ib2gw")
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="GlobalSpawnTimer" to="." method="_on_global_spawn_timer_timeout"]
-[connection signal="end_of_game" from="PlayerManager" to="." method="_on_player_manager_end_of_game"]
-[connection signal="start_of_game" from="PlayerManager" to="." method="_on_player_manager_start_of_game"]

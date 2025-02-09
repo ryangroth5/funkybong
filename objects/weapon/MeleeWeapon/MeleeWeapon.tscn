@@ -8,3 +8,5 @@ script = ExtResource("1_h3haf")
 default_weapon_scene = ExtResource("2_firct")
 
 [node name="CurrentWeapon" parent="." instance=ExtResource("2_firct")]
+sleeping = true
+freeze = true
