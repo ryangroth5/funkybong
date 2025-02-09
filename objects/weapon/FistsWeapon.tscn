@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdjuj13bcvrqq"]
+
+[ext_resource type="Script" path="res://objects/weapon/fists_weapon.gd" id="1_01vax"]
+[ext_resource type="Texture2D" uid="uid://byfa8pirnvdly" path="res://assets/Weapons/Hands/Hands.png" id="2_h4olp"]
+[ext_resource type="Script" path="res://logic/weapon/hit_box.gd" id="3_sc5lv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tg18o"]
+radius = 12.6491
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lj6kj"]
+
+[node name="FistsWeapon" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_01vax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tg18o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.970588, 1)
+texture = ExtResource("2_h4olp")
+region_enabled = true
+region_rect = Rect2(0, 0, 17.3333, 16.9997)
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("3_sc5lv")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_lj6kj")
