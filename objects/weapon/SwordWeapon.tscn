@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx8wvi35ugduw"]
+[gd_scene load_steps=8 format=3 uid="uid://cx8wvi35ugduw"]
 
 [ext_resource type="Texture2D" uid="uid://y2snopdlq3ny" path="res://assets/Weapons/Wood/Wood.png" id="1_3h57v"]
 [ext_resource type="Script" path="res://objects/weapon/sword_weapon.gd" id="1_s1v84"]
+[ext_resource type="Resource" uid="uid://cwrvpksswgphs" path="res://objects/weapon/resources/sword_prop.tres" id="2_cadjr"]
 [ext_resource type="Script" path="res://logic/weapon/hit_box.gd" id="2_svxsb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bri8n"]
@@ -19,6 +20,7 @@ height = 38.0
 [node name="SwordWeapon" type="RigidBody2D"]
 collision_layer = 32
 script = ExtResource("1_s1v84")
+prop_resource = ExtResource("2_cadjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -15)

@@ -1,7 +1,7 @@
 class_name SwordWeapon
 extends WeaponBody2D
 
-
+@export var prop_resource: Resource;
 var check_interval: float = 0.25 # Quarter second intervals
 
 func can_pickup(_who: Node2D):
