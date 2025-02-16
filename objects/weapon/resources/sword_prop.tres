@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://logic/prop_holder/melee_weapon_prop.gd" id="1_622jw"]
 [ext_resource type="Texture2D" uid="uid://fl5utxroo545" path="res://assets/Environment/dungeon48x48/barrels/Barrels_01.png" id="1_krghf"]
-[ext_resource type="PackedScene" uid="uid://cx8wvi35ugduw" path="res://objects/weapon/SwordWeapon.tscn" id="2_okccr"]
+
 
 [resource]
 script = ExtResource("1_622jw")
@@ -11,4 +11,3 @@ attack_range = 1.2
 prop_name = "Sword"
 description = "A basic sword"
 icon = ExtResource("1_krghf")
-scene = ExtResource("2_okccr")
