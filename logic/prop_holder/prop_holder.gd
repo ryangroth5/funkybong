@@ -1,10 +1,10 @@
 class_name PropHolder
 extends Node2D
 
-signal prop_picked_up(prop: Prop) # Signal now emits Prop resource
-signal prop_thrown(prop: Prop) # Signal now emits Prop resource
-signal equipped(prop: Prop) # Signal now emits Prop resource
-signal unequipped(prop: Prop) # Signal now emits Prop resource
+signal prop_picked_up(prop: RigidBody2D) # Signal now emits RigidBody2D prop
+signal prop_thrown(prop: RigidBody2D) # Signal now emits RigidBody2D prop
+signal equipped(prop: RigidBody2D) # Signal now emits RigidBody2D prop
+signal unequipped(prop: RigidBody2D) # Signal now emits RigidBody2D prop
 
 var _enabled = true;
 @export var enabled: bool:
@@ -31,7 +31,7 @@ func set_pickup_radius(value: float) -> void:
 # Now held_prop is of type Prop (or subclass)
 @export var held_prop: Prop = null
 @onready var marker: Marker2D = $Marker2D
-var current_prop_instance: Node2D = null # Now a generic Node2D for the instantiated scene
+var current_prop_instance: RigidBody2D = null # Now directly store the RigidBody2D prop
 
 # set the radius of effect to desired pickup radius
 func _ready() -> void:
@@ -39,12 +39,12 @@ func _ready() -> void:
 	held_prop = null;
 
 func show_prop():
-	if !held_prop or !current_prop_instance: # Check if instance exists
+	if !current_prop_instance: # Check if prop instance exists
 		return
 	current_prop_instance.visible = true
 
 func hide_prop():
-	if !held_prop or !current_prop_instance: # Check if instance exists
+	if !current_prop_instance: # Check if prop instance exists
 		return
 	current_prop_instance.visible = false
 
@@ -57,23 +57,13 @@ func which_prop() -> Prop: # Return Prop resource
 func can_pickup() -> bool:
 	return enabled and held_prop == null
 
-# pickup_prop now expects a Prop resource
+# pickup_prop now expects a Prop resource and RigidBody2D
 func pickup_prop(prop_resource: Prop, prop_body: RigidBody2D) -> void:
 	if !can_pickup():
 		return
 
 	held_prop = prop_resource
-
-	# Instantiate the scene from the Prop resource
-	if held_prop.scene:
-		var prop_scene_instance = held_prop.scene.instantiate()
-		marker.add_child.call_deferred(prop_scene_instance)
-		current_prop_instance = prop_scene_instance
-		current_prop_instance.position = Vector2.ZERO
-		current_prop_instance.rotation = 0
-	else:
-		printerr("Prop resource has no scene assigned: ", held_prop)
-		return # Exit if no scene is assigned
+	current_prop_instance = prop_body # Directly store the RigidBody2D prop
 
 	if (prop_body.has_method('picked_up')):
 		prop_body.picked_up()
@@ -83,21 +73,26 @@ func pickup_prop(prop_resource: Prop, prop_body: RigidBody2D) -> void:
 	# Remove from current parent
 	var original_parent = prop_body.get_parent()
 	original_parent.remove_child.call_deferred(prop_body)
-	# We don't add prop_body to the marker anymore, only the instantiated scene
+	# Add prop_body to the marker directly
+	marker.add_child.call_deferred(prop_body)
+	# Reset transform
+	prop_body.position = Vector2.ZERO
+	prop_body.rotation = 0
 
-	prop_picked_up.emit(held_prop)
-	equipped.emit(held_prop)
+
+	prop_picked_up.emit(current_prop_instance)
+	equipped.emit(current_prop_instance) # Emit RigidBody2D prop
 
 func throw_prop(direction: Vector2) -> void:
 	if !held_prop or !current_prop_instance:
 		return
 
-	# Get the RigidBody2D from the instantiated scene (assuming it's the root or a child)
-	var prop_body = current_prop_instance as RigidBody2D # Or find child if needed
+	# Get the RigidBody2D prop directly (it's stored in current_prop_instance)
+	var prop_body = current_prop_instance
 
 	if prop_body:
-		# Remove scene from marker
-		marker.remove_child(current_prop_instance)
+		# Remove prop from marker
+		marker.remove_child(prop_body)
 		# Add the prop_body back to the original scene tree level (or perhaps the PropHolder's parent?)
 		owner.get_parent().add_child(prop_body) # Or adjust parent as needed
 		# Set global position to throw start position
@@ -107,23 +102,23 @@ func throw_prop(direction: Vector2) -> void:
 		prop_body.freeze = false
 		prop_body.linear_velocity = direction.normalized() * throw_force
 	else:
-		printerr("Instantiated prop scene does not have a RigidBody2D as root or child.")
-		# Handle case where RigidBody2D is not found in instantiated scene
+		printerr("current_prop_instance is not a valid RigidBody2D.")
+		# Handle case where RigidBody2D is not found
 
-	var thrown_prop = held_prop
+	var thrown_prop = current_prop_instance
+	var unequipped_prop_resource = held_prop # Keep track of Prop resource for unequipped signal
 
 	current_prop_instance = null
 	held_prop = null
 
 	prop_thrown.emit(thrown_prop)
-	unequipped.emit(thrown_prop)
+	unequipped.emit(thrown_prop) # Emit RigidBody2D prop
 
 func _on_area_2d_body_entered(body: RigidBody2D) -> void:
 	if body.has_method("can_pickup"):
 		if (can_pickup() and body.can_pickup(owner)):
 			$PickupStream.playing = true
-			
-			# Assuming the body has a "prop_resource" property of type Prop
+
 			var prop_resource = body.get("prop_resource")
 			if prop_resource is Prop:
 				pickup_prop(prop_resource, body) # Pass both Prop resource and body

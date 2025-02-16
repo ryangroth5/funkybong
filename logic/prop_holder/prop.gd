@@ -3,7 +3,6 @@ class_name Prop extends Resource
 @export var prop_name: String = "Generic Prop"
 @export var description: String = "A basic prop."
 @export var icon: Texture2D # Optional: for UI representation
-@export var scene: PackedScene # Scene for visual representation
 
 # Virtual function - can be overridden by specific prop types
 func picked_up(holder):
