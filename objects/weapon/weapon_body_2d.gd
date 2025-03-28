@@ -10,19 +10,19 @@ var can_cause_damage: bool = false # Only deals damage when in flight
 
 
 func _physics_process(delta):
-    update_flight_status(delta)
+	update_flight_status(delta)
 
 func update_flight_status(delta):
-    if linear_velocity.length() > velocity_threshold:
-        is_in_flight = true
-        can_cause_damage = true
-        ground_timer = 0.0 # Reset ground timer since it's moving
-    else:
-        ground_timer += delta
-        if ground_timer >= ground_time_threshold:
-            is_in_flight = false
-            can_cause_damage = false # Stationary objects don't cause damage
+	if linear_velocity.length() > velocity_threshold:
+		is_in_flight = true
+		can_cause_damage = true
+		ground_timer = 0.0 # Reset ground timer since it's moving
+	else:
+		ground_timer += delta
+		if ground_timer >= ground_time_threshold:
+			is_in_flight = false
+			can_cause_damage = false # Stationary objects don't cause damage
 
 func _on_thrown():
-    is_in_flight = true
-    can_cause_damage = true
+	is_in_flight = true
+	can_cause_damage = true

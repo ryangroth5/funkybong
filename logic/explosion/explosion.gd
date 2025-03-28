@@ -59,5 +59,6 @@ func spawn_body_parts() -> void:
 			body_part.effect_duration = part_lifetime
 			body_part.bounce_count = 2
 			body_part.initial_orientation = -1 # Random rotation
+			#body part gets created here.
 			add_child(body_part)
 			

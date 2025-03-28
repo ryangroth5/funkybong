@@ -30,13 +30,18 @@ func set_pickup_radius(value: float) -> void:
 
 # Now held_prop is of type Prop (or subclass)
 @export var held_prop: Prop = null
-@onready var marker: Marker2D = $Marker2D
+@onready var marker: Node2D = $Marker2D
 var current_prop_instance: RigidBody2D = null # Now directly store the RigidBody2D prop
 
 # set the radius of effect to desired pickup radius
 func _ready() -> void:
 	$Area2D/CollisionShape2D.shape.radius = pickup_radius
 	held_prop = null;
+
+	if marker == null: # Check if marker is null (not found)
+		printerr("Error: Marker2D node not found in PropHolder scene!")
+	else:
+		print("PropHolder: Marker2D node found successfully: ", marker) # Log success
 
 func show_prop():
 	if !current_prop_instance: # Check if prop instance exists

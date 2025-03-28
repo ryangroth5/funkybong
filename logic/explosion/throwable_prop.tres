@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ThrowableProp" load_steps=3 format=3 uid="uid://bhobddats470s"]
+
+[ext_resource type="Texture2D" uid="uid://cr6tvdv0ve6cv" path="res://addons/gut/gui/play.png" id="1_qgwue"]
+[ext_resource type="Script" path="res://logic/prop_holder/throwable_prop.gd" id="2_qd6yo"]
+
+[resource]
+script = ExtResource("2_qd6yo")
+prop_name = "A body Part"
+description = "A basic prop."
+icon = ExtResource("1_qgwue")

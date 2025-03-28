@@ -1,7 +1,8 @@
-[gd_scene load_steps=70 format=3 uid="uid://de0cn1j4nyar1"]
+[gd_scene load_steps=71 format=3 uid="uid://de0cn1j4nyar1"]
 
-[ext_resource type="Script" path="res://logic/explosion/body_part.gd" id="1_uukq0"]
+[ext_resource type="Script" path="res://logic/explosion/body_part.gd" id="1_itlrb"]
 [ext_resource type="Texture2D" uid="uid://36e285j42f0y" path="res://assets/Heroes/Starting/caveman-Sheet.png" id="2_1if3l"]
+[ext_resource type="Resource" uid="uid://bhobddats470s" path="res://logic/explosion/throwable_prop.tres" id="2_epctm"]
 [ext_resource type="Texture2D" uid="uid://cmauti50rf727" path="res://assets/Enemy/skeleton/skeleton.png" id="2_wx60r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j70eq"]
@@ -504,7 +505,8 @@ collision_layer = 32
 collision_mask = 7
 contact_monitor = true
 max_contacts_reported = 4
-script = ExtResource("1_uukq0")
+script = ExtResource("1_itlrb")
+prop_resource = ExtResource("2_epctm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(26, 19)
@@ -518,3 +520,5 @@ root_node = NodePath("../AnimatedSprite2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)
 shape = SubResource("CapsuleShape2D_r8x4n")
+
+[node name="Marker2D" type="Marker2D" parent="."]

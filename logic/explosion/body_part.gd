@@ -1,10 +1,12 @@
 class_name BodyPart
 extends RigidBody2D
+@export var prop_resource: Resource;
 @export var animation = "skeleton_head"
 @export var initial_orientation: float = -1 # -1 means random
 @export var initial_force: float = 600.0
 @export var initial_torque: float = 10.0
 @export var max_height: float = 50.0
+#** the lifetime of a body parts in seconds since spawning.
 @export var effect_duration: float = 5.0
 @export var scale_duration: float = -1.0 # -1 means use default (50% of effect_duration)
 @export var bounce_count: int = 2 # Number of bounces before settling
@@ -122,9 +124,15 @@ func _physics_process(delta: float) -> void:
 	var velocity_angle = linear_velocity.angle()
 	var blend_factor = clamp(linear_velocity.length() / initial_force, 0, 1)
 	target_rotation = lerp_angle(rotation, velocity_angle, blend_factor)
+	
 	# Optional: fade out near the end of the effect
-	if current_time >= effect_duration:
-		queue_free()
+	if current_time >= effect_duration: 
+		if !prop_resource.is_held():
+			queue_free()
+		else:
+			#advance time to check at least another effect_duration, so a thrown 
+			#prop doesn't immediately dissapear.
+			current_time += effect_duration
 
 func _on_body_entered(body: Node) -> void:
 	# For RigidBody2D, we need to enable contact_monitor and set contacts_reported
